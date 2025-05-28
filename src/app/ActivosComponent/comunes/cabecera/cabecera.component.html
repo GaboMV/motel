@@ -1,0 +1,33 @@
+
+<div class="inventual-header-content flex items-center justify-end custom-height-70">
+    <div class="inventual-header-timer text-end items-end  flex-col justify-center pe-7 custom-height-70 hidden">
+      <h5 class="font-bold text-[20px] text-heading mb-1">03:43:35</h5>
+      <span class="font-semibold text-[12px] text-heading">30/12/2022</span>
+    </div>
+    <div class="inventual-header-profile relative ps-5 flex flex-wrap items-center pe-11 sm:pe-0 md:pe-0" (click)="prodropdown()">
+      <div class="inventual-header-profile-img w-12 sm:me-0 md:me-0 cursor-pointer">
+        <a href="javascript:void(0)"><img src="../../../../assets/img/icon/header-profile.svg" class="object-cover"
+            alt="profile not found"></a>
+      </div>
+      <div class="inventual-header-profile-info md:hidden sm:hidden ps-2.5 cursor-pointer">
+        <h5 class="text-[15px] font-bold text-heading cursor-pointer">{{ user?.nombre }} {{ user?.apellidoPaterno }}</h5>
+        <span class="text-[13px] font-normal text-body cursor-pointer">
+          {{ user?.rolId === 1 ? 'Administrador' : user?.rolId === 2 ? 'Lector' : 'Editor' }}
+        </span>
+        <mat-icon class="cursor-pointer">keyboard_arrow_down</mat-icon>
+      </div>
+
+      <div class="inventual-quick-dropdown inventual-quick-pro-dropdown" [class.promenu-enable]="proShortcutActive">
+        <ul>
+          <!-- <li><a href="javascript:void(0)"><i class="fal fa-user"></i> Perfil</a></li> -->
+          <li><a [routerLink]="['']"><i class="fal fa-sign-out"></i> Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<div class="inventual-header-overlay" (click)="shortmenu()" [class.shortmenu-enable]="menuShortcutActive"></div>
+<div class="inventual-header-overlay" (click)="notifydropdown()" [class.notifydropdown-enable]="notifyShortcutActive"></div>
+<div class="inventual-header-overlay" (click)="emaildropdown()" [class.emaildropdown-enable]="emailShortcutActive"></div>
+<div class="inventual-header-overlay" (click)="langdropdown()" [class.langmenu-enable]="langShortcutActive"></div>
+<div class="inventual-header-overlay" (click)="prodropdown()" [class.promenu-enable]="proShortcutActive"></div>

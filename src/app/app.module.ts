@@ -16,7 +16,7 @@ import { ActivosProyectModule } from './ActivosComponent/activosProyect.module';
     BrowserAnimationsModule,
     InventualModule,
     ActivosProyectModule,
-    MatIconModule
+    MatIconModule,
   ],
   declarations: [
     AppComponent

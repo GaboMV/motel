@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserModel } from 'src/app/ActivosComponent/models/user.model';
-import { UserServiceService } from 'src/app/ActivosComponent/services/user-service.service';
 
 @Component({
   selector: 'app-header',
@@ -14,10 +12,7 @@ export class HeaderComponent implements OnInit {
   langShortcutActive: boolean = false;
   proShortcutActive: boolean = false;
 
-  user: UserModel | null = null;
-
   constructor(
-    private userService: UserServiceService
   ) { }
 
   ngOnInit(): void {
@@ -25,14 +20,6 @@ export class HeaderComponent implements OnInit {
   }
 
   loadUserDetails(): void {
-    this.userService.getUserProfile().subscribe({
-      next: (response) => {
-        this.user = response.data;
-      },
-      error: (err) => {
-        console.error('Error al obtener los datos del usuario', err);
-      }
-    });
   }
 
   shortmenu() {

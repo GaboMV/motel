@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserModel } from '../../models/user.model';
-import { UserServiceService } from '../../services/user-service.service';
 
 @Component({
   selector: 'app-cabecera',
@@ -89,12 +87,8 @@ export class CabeceraComponent implements OnInit {
 
     }
   }
-  //short menu activation end
-
-  user: UserModel | null = null;
 
   constructor(
-    private userService: UserServiceService
   ) { }
 
   ngOnInit(): void {
@@ -102,14 +96,6 @@ export class CabeceraComponent implements OnInit {
   }
 
   loadUserDetails(): void {
-    this.userService.getUserProfile().subscribe({
-      next: (response) => {
-        this.user = response.data;
-      },
-      error: (err) => {
-        console.error('Error al obtener los datos del usuario', err);
-      }
-    });
   }
 
 }

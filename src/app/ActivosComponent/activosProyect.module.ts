@@ -30,8 +30,6 @@ import { RouterModule } from "@angular/router";
 import { NgApexchartsModule } from "ng-apexcharts";
 import { ActivosLoginComponent } from "./activos-login/activos-login.component";
 import { RecuperarPasswordComponent } from './recuperar-password/recuperar-password.component';
-import { GestionActividadesComponent } from './gestion-actividades/gestion-actividades.component';
-import { GestionUsuariosComponent } from './gestion-usuarios/gestion-usuarios.component';
 import { SideMenuComponent } from './comunes/side-menu/side-menu.component';
 import { CabeceraComponent } from './comunes/cabecera/cabecera.component';
 import { SublevelMenuComponent } from "./comunes/side-menu/sublevel-menu.component";
@@ -42,76 +40,22 @@ import { PrinterIconComponent } from "./comunes/icons/printer-icon/printer-icon.
 import { BellIconComponent } from "./comunes/icons/bell-icon/bell-icon.component";
 import { EmailIconComponent } from "./comunes/icons/email-icon/email-icon.component";
 import { GlobeIconComponent } from "./comunes/icons/globe-icon/globe-icon.component";
-import { ListaActivosComponent } from './lista-activos/lista-activos.component';
-import { RegistroUsuariosComponent } from './registro-usuarios/registro-usuarios.component';
-import { GestionMonedasComponent } from './gestion-monedas/gestion-monedas.component';
-import { ResgistroMonedasComponent } from './resgistro-monedas/resgistro-monedas.component';
-import { RegistroActivosComponent } from './registro-activos/registro-activos.component';
-import { ActivoIndividualComponent } from './activo-individual/activo-individual.component';
-import { ActivoProyectoComponent } from './activo-proyecto/activo-proyecto.component';
-import { GestionProyectosComponent } from './gestion-proyectos/gestion-proyectos.component';
-import { GestionCustodiosComponent } from './gestion-custodios/gestion-custodios.component';
-import { GestionUbicacionesComponent } from './gestion-ubicaciones/gestion-ubicaciones.component';
 import { NgxsModule } from "@ngxs/store";
 import { NgxsLoggerPluginModule } from "@ngxs/logger-plugin";
 import { NgxsReduxDevtoolsPluginModule } from "@ngxs/devtools-plugin";
-import { UserState } from "./state-management/user/user.state";
-import { GestionRolesComponent } from './gestion-roles/gestion-roles.component';
-import { RolState } from "./state-management/rol/rol.state";
-import { DivisaState } from "./state-management/divisa/divisa.state";
-import { ActivoState } from "./state-management/activos/activos.state";
-import { CustodiosState } from "./state-management/custodios/custodios.state";
-import { GestionAreasComponent } from './gestion-areas/gestion-areas.component';
-import { GestionEmpresasComponent } from './gestion-empresas/gestion-empresas.component';
-import { EmpresasState } from "./state-management/empresa/empresa.state";
-import { AreasState } from "./state-management/area/area.state";
-import { ProyectoState } from "./state-management/proyecto/proyecto.state";
-import { PaisState } from "./state-management/ubicacion/pais/pais.state";
-import { DepartamentoState } from "./state-management/ubicacion/departamento/departamento.state";
-import { ProvinciaState } from "./state-management/ubicacion/provincia/provincia.state";
-import { MunicipioState } from "./state-management/ubicacion/municipio/municipio.state";
-import { SucursalState } from "./state-management/ubicacion/sucursal/sucursal.state";
-import { BloqueState } from "./state-management/ubicacion/bloque/bloque.state";
-import { AulaState } from "./state-management/ubicacion/aula/aula.state";
-import { DireccionState } from "./state-management/ubicacion/direccion/direccion.state";
-import { PaisDialogComponent } from './comunes/direccionDialogs/pais-dialog/pais-dialog.component';
-import { DepartamentoDialogComponent } from './comunes/direccionDialogs/departamento-dialog/departamento-dialog.component';
-import { ProvinciaDialogComponent } from './comunes/direccionDialogs/provincia-dialog/provincia-dialog.component';
-import { MunicipioDialogComponent } from './comunes/direccionDialogs/municipio-dialog/municipio-dialog.component';
-import { SucursalDialogComponent } from './comunes/direccionDialogs/sucursal-dialog/sucursal-dialog.component';
-import { BloqueDialogComponent } from './comunes/direccionDialogs/bloque-dialog/bloque-dialog.component';
-import { AulaDialogComponent } from './comunes/direccionDialogs/aula-dialog/aula-dialog.component';
-import { DireccionDialogComponent } from './comunes/direccionDialogs/direccion-dialog/direccion-dialog.component';
-import { GestionCategoriasComponent } from './gestion-categorias/gestion-categorias.component';
-import { GestionDepreciacionComponent } from './gestion-depreciacion/gestion-depreciacion.component';
-import { GestionEstadousoComponent } from './gestion-estadouso/gestion-estadouso.component';
-import { GestionIdentificadoresComponent } from './gestion-identificadores/gestion-identificadores.component';
-import { CategoriaState } from "./state-management/categoria/categoria.state";
-import { DepreciacionState } from "./state-management/depreciaciones/depreciacion.state";
-import { IdentificadorState } from "./state-management/identificadores/identificadores.state";
-import { EstadoState } from "./state-management/estado/estado.state";
-import { GestionMarcasComponent } from './gestion-marcas/gestion-marcas.component';
-import { GestionModelosComponent } from './gestion-modelos/gestion-modelos.component';
-import { MarcaState } from "./state-management/marca/marca.state";
-import { ModeloState } from "./state-management/modelo/modelo.state";
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-import { UsuarioEditComponent } from './comunes/editDialogs/usuario-edit/usuario-edit.component';
-import { DivisaEditComponent } from './comunes/editDialogs/divisa-edit/divisa-edit.component';
-import { CustodioEditComponent } from './comunes/editDialogs/custodio-edit/custodio-edit.component';
-import { CategoriaEditComponent } from './comunes/editDialogs/categoria-edit/categoria-edit.component';
-import { MarcasEditComponent } from './comunes/editDialogs/marcas-edit/marcas-edit.component';
-import { ModelosEditComponent } from './comunes/editDialogs/modelos-edit/modelos-edit.component';
-import { AreasEditComponent } from './comunes/editDialogs/areas-edit/areas-edit.component';
-import { ProyectosEditComponent } from './comunes/editDialogs/proyectos-edit/proyectos-edit.component';
-import { ActivosEditComponent } from './comunes/editDialogs/activos-edit/activos-edit.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {NgFor, AsyncPipe} from '@angular/common';
-import { HistorialActivoState } from "./state-management/historial-activo/historial-activo.state";
-import { ProyectoDialogComponent } from './comunes/addDialogs/proyecto-dialog/proyecto-dialog.component';
-import { ModeloDialogComponent } from './comunes/addDialogs/modelo-dialog/modelo-dialog.component';
-import { CustodioDialogComponent } from './comunes/addDialogs/custodio-dialog/custodio-dialog.component';
-import { ConfirmacionDeleteComponent } from './comunes/addDialogs/confirmacion-delete/confirmacion-delete.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ActividadUsuariosComponent } from "./vistas/actividad-usuarios/actividad-usuarios.component";
+import { DashboardMotelComponent } from "./vistas/dashboard/dashboard.component";
+import { GestionCuartosComponent } from "./vistas/gestion-cuartos/gestion-cuartos.component";
+import { GestionEmpleadosComponent } from "./vistas/gestion-empleados/gestion-empleados.component";
+import { GestionProductosComponent } from "./vistas/gestion-productos/gestion-productos.component";
+import { GestionRolesMotelComponent } from "./vistas/gestion-roles/gestion-roles.component";
+import { GestionSucursalesComponent } from "./vistas/gestion-sucursales/gestion-sucursales.component";
+import { GestionTipoCuartosComponent } from "./vistas/gestion-tipo-cuartos/gestion-tipo-cuartos.component";
+import { GestionTransaccionesComponent } from "./vistas/gestion-transacciones/gestion-transacciones.component";
 
 @NgModule({
   imports: [
@@ -150,7 +94,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     MatTableModule,
     DragDropModule,
     MatSnackBarModule,
-    NgxsModule.forRoot([HistorialActivoState ,RolState, UserState, DivisaState, ActivoState, CustodiosState, EmpresasState, AreasState, ProyectoState, PaisState, DepartamentoState, ProvinciaState, MunicipioState, SucursalState, BloqueState, AulaState, DireccionState, CategoriaState, DepreciacionState, IdentificadorState, EstadoState, MarcaState, ModeloState]),  // Registra tu estado de usuarios
+    NgxsModule.forRoot([]),
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     QRCodeModule
@@ -158,8 +102,6 @@ import { QRCodeModule } from 'angularx-qrcode';
   declarations: [
     ActivosLoginComponent,
     RecuperarPasswordComponent,
-    GestionActividadesComponent,
-    GestionUsuariosComponent,
     SideMenuComponent,
     CabeceraComponent,
     SublevelMenuComponent,
@@ -170,46 +112,16 @@ import { QRCodeModule } from 'angularx-qrcode';
     BellIconComponent,
     EmailIconComponent,
     GlobeIconComponent,
-    ListaActivosComponent,
-    RegistroUsuariosComponent,
-    GestionMonedasComponent,
-    ResgistroMonedasComponent,
-    RegistroActivosComponent,
-    ActivoIndividualComponent,
-    ActivoProyectoComponent,
-    GestionProyectosComponent,
-    GestionCustodiosComponent,
-    GestionUbicacionesComponent,
-    GestionRolesComponent,
-    GestionAreasComponent,
-    GestionEmpresasComponent,
-    PaisDialogComponent,
-    DepartamentoDialogComponent,
-    ProvinciaDialogComponent,
-    MunicipioDialogComponent,
-    SucursalDialogComponent,
-    BloqueDialogComponent,
-    AulaDialogComponent,
-    DireccionDialogComponent,
-    GestionCategoriasComponent,
-    GestionDepreciacionComponent,
-    GestionEstadousoComponent,
-    GestionIdentificadoresComponent,
-    GestionMarcasComponent,
-    GestionModelosComponent,
-    UsuarioEditComponent,
-    DivisaEditComponent,
-    CustodioEditComponent,
-    CategoriaEditComponent,
-    MarcasEditComponent,
-    ModelosEditComponent,
-    AreasEditComponent,
-    ProyectosEditComponent,
-    ActivosEditComponent,
-    ProyectoDialogComponent,
-    ModeloDialogComponent,
-    CustodioDialogComponent,
-    ConfirmacionDeleteComponent,
+    //Vistas para motel
+    ActividadUsuariosComponent,
+    DashboardMotelComponent,
+    GestionCuartosComponent,
+    GestionEmpleadosComponent,
+    GestionProductosComponent,
+    GestionRolesMotelComponent,
+    GestionSucursalesComponent,
+    GestionTipoCuartosComponent,
+    GestionTransaccionesComponent
   ],
 })
 export class ActivosProyectModule {}

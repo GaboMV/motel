@@ -38,9 +38,9 @@
               </div>
               <div class="inventual-profile-info-text">
                 <!-- Mostrar dinámicamente el nombre completo del usuario -->
-                <h4 class="text-heading font-bold text-[24px] mb-1">{{ user?.nombre }} {{ user?.apellidoPaterno }} {{ user?.apellidoMaterno }}</h4>
+                <h4 class="text-heading font-bold text-[24px] mb-1">Nombre Completo</h4>
                 <!-- Mostrar el rol del usuario -->
-                <span class="text-[16px] text-body">Rol: {{ user?.rolId }}</span>
+                <span>Rol</span>
               </div>
             </div>
             <div class="inventual-profile-info-btn">
@@ -54,7 +54,7 @@
                 <div class="inventual-input-field-style">
                   <mat-form-field class="w-full" [floatLabel]="'always'">
                     <mat-label class="hidden">Nombre</mat-label>
-                    <input matInput [placeholder]="'Nombre'" [value]="user?.nombre" [disabled]="!isProfileEnabled">
+                    <input matInput [placeholder]="'Nombre'">
                   </mat-form-field>
                 </div>
               </div>
@@ -65,7 +65,7 @@
                 <div class="inventual-input-field-style">
                   <mat-form-field class="w-full" [floatLabel]="'always'">
                     <mat-label class="hidden">Apellido Paterno</mat-label>
-                    <input matInput [placeholder]="'Apellido Paterno'" [value]="user?.apellidoPaterno" [disabled]="!isProfileEnabled">
+                    <input matInput [placeholder]="'Apellido Paterno'">
                   </mat-form-field>
                 </div>
               </div>
@@ -76,7 +76,7 @@
                 <div class="inventual-input-field-style">
                   <mat-form-field class="w-full" [floatLabel]="'always'">
                     <mat-label class="hidden">Apellido Materno</mat-label>
-                    <input matInput [placeholder]="'Apellido Materno'" [value]="user?.apellidoMaterno" [disabled]="!isProfileEnabled">
+                    <input matInput [placeholder]="'Apellido Materno'">
                   </mat-form-field>
                 </div>
               </div>
@@ -87,7 +87,7 @@
                 <div class="inventual-input-field-style">
                   <mat-form-field class="w-full" [floatLabel]="'always'">
                     <mat-label class="hidden">Correo</mat-label>
-                    <input type="email" matInput [placeholder]="'Correo'" [value]="user?.correo" [disabled]="!isProfileEnabled">
+                    <input type="email" matInput [placeholder]="'Correo'">
                   </mat-form-field>
                 </div>
               </div>
@@ -98,7 +98,7 @@
                 <div class="inventual-input-field-style">
                   <mat-form-field class="w-full" [floatLabel]="'always'">
                     <mat-label class="hidden">Teléfono</mat-label>
-                    <input matInput [placeholder]="'Teléfono'" [value]="user?.telefono" [disabled]="!isProfileEnabled">
+                    <input matInput [placeholder]="'Teléfono'">
                   </mat-form-field>
                 </div>
               </div>
@@ -108,7 +108,7 @@
                 <h5 class="text-[15px] text-heading font-semibold mb-3">Rol</h5>
                 <div class="inventual-select-field-style">
                   <mat-form-field>
-                    <mat-select [value]="user?.rolId" [disabled]="!isProfileEnabled">
+                    <mat-select>
                       <mat-option value="1">Admin</mat-option>
                       <mat-option value="2">Staff</mat-option>
                       <mat-option value="3">Manager</mat-option>

@@ -63,131 +63,31 @@ import { ElementsComponent } from './inventual/elements/elements.component';
 import { NotFoundComponent } from './inventual/not-found/not-found.component';
 import { ActivosLoginComponent } from './ActivosComponent/activos-login/activos-login.component';
 import { RecuperarPasswordComponent } from './ActivosComponent/recuperar-password/recuperar-password.component';
-import { GestionUsuariosComponent } from './ActivosComponent/gestion-usuarios/gestion-usuarios.component';
-import { ListaActivosComponent } from './ActivosComponent/lista-activos/lista-activos.component';
-import { RegistroUsuariosComponent } from './ActivosComponent/registro-usuarios/registro-usuarios.component';
-import { GestionActividadesComponent } from './ActivosComponent/gestion-actividades/gestion-actividades.component';
-import { ResgistroMonedasComponent } from './ActivosComponent/resgistro-monedas/resgistro-monedas.component';
-import { GestionMonedasComponent } from './ActivosComponent/gestion-monedas/gestion-monedas.component';
-import { RegistroActivosComponent } from './ActivosComponent/registro-activos/registro-activos.component';
-import { GestionCustodiosComponent } from './ActivosComponent/gestion-custodios/gestion-custodios.component';
-import { GestionProyectosComponent } from './ActivosComponent/gestion-proyectos/gestion-proyectos.component';
-import { GestionUbicacionesComponent } from './ActivosComponent/gestion-ubicaciones/gestion-ubicaciones.component';
-import { ActivoIndividualComponent } from './ActivosComponent/activo-individual/activo-individual.component';
-import { GestionRolesComponent } from './ActivosComponent/gestion-roles/gestion-roles.component';
-import { GestionAreasComponent } from './ActivosComponent/gestion-areas/gestion-areas.component';
-import { GestionEmpresasComponent } from './ActivosComponent/gestion-empresas/gestion-empresas.component';
-import { GestionCategoriasComponent } from './ActivosComponent/gestion-categorias/gestion-categorias.component';
-import { GestionDepreciacionComponent } from './ActivosComponent/gestion-depreciacion/gestion-depreciacion.component';
-import { GestionEstadousoComponent } from './ActivosComponent/gestion-estadouso/gestion-estadouso.component';
-import { GestionIdentificadoresComponent } from './ActivosComponent/gestion-identificadores/gestion-identificadores.component';
-import { GestionMarcasComponent } from './ActivosComponent/gestion-marcas/gestion-marcas.component';
-import { GestionModelosComponent } from './ActivosComponent/gestion-modelos/gestion-modelos.component';
-import { ActivoProyectoComponent } from './ActivosComponent/activo-proyecto/activo-proyecto.component';
+import { ActividadUsuariosComponent } from './ActivosComponent/vistas/actividad-usuarios/actividad-usuarios.component';
+import { GestionCuartosComponent } from './ActivosComponent/vistas/gestion-cuartos/gestion-cuartos.component';
+import { GestionEmpleadosComponent } from './ActivosComponent/vistas/gestion-empleados/gestion-empleados.component';
+import { GestionProductosComponent } from './ActivosComponent/vistas/gestion-productos/gestion-productos.component';
+import { GestionSucursalesComponent } from './ActivosComponent/vistas/gestion-sucursales/gestion-sucursales.component';
+import { GestionTipoCuartosComponent } from './ActivosComponent/vistas/gestion-tipo-cuartos/gestion-tipo-cuartos.component';
+import { GestionTransaccionesComponent } from './ActivosComponent/vistas/gestion-transacciones/gestion-transacciones.component';
+import { DashboardMotelComponent } from './ActivosComponent/vistas/dashboard/dashboard.component';
+import { GestionRolesMotelComponent } from './ActivosComponent/vistas/gestion-roles/gestion-roles.component';
 
 
-const routes: Routes = [ 
-  //Rutas ActivosFijos
+const routes: Routes = [
   //Rutas comunes
   {
     path: '',
     component: ActivosLoginComponent,
-    pathMatch: 'full' 
+    pathMatch: 'full'
   },
   {
     path: 'recuperarpassword',
     component: RecuperarPasswordComponent
   },
-  //Rutas de gestion de usuarios
-  {
-    path: 'usuarios/lista',
-    component: GestionUsuariosComponent
-  },
-  {
-    path: 'usuarios/registro',
-    component: RegistroUsuariosComponent
-  },
-  {
-    path: 'usuarios/actividades',
-    component: GestionActividadesComponent
-  },
-  {
-    path: 'usuarios/roles',
-    component: GestionRolesComponent
-  },
-  //Rutas de activos fijos
-  {
-    path: 'activos/lista',
-    component: ListaActivosComponent
-  },
-  {
-    path: 'activos/registro',
-    component: RegistroActivosComponent
-  },
-  {
-    path: 'empresas',
-    component: GestionEmpresasComponent
-  },
-  {
-    path: 'areas',
-    component: GestionAreasComponent
-  },
-  {
-    path: 'custodios',
-    component: GestionCustodiosComponent
-  },
-  {
-    path: 'proyectos',
-    component: GestionProyectosComponent
-  },
-  {
-    path: 'ubicaciones',
-    component: GestionUbicacionesComponent
-  },
-  {
-    path: 'editar/activo',
-    component: ActivoIndividualComponent
-  },
-  {
-    path: 'editar/activoProyecto',
-    component: ActivoProyectoComponent
-  },
-  {
-    path: 'categorias',
-    component: GestionCategoriasComponent
-  },
-  {
-    path: 'depreciacion',
-    component: GestionDepreciacionComponent
-  },
-  {
-    path: 'estadouso',
-    component: GestionEstadousoComponent
-  },
-  {
-    path: 'identificadores',
-    component: GestionIdentificadoresComponent
-  },
-  {
-    path: 'modelos',
-    component: GestionModelosComponent
-  },
-  {
-    path: 'marcas',
-    component: GestionMarcasComponent
-  },
-  //Rutas de monedas
-  {
-    path: 'divisas/lista',
-    component: GestionMonedasComponent
-  },
-  {
-    path: 'divisas/registro',
-    component: ResgistroMonedasComponent
-  },
 
   //Rutas Inventual
-  { path: 'logininventual', component: LoginComponent},
+  { path: 'logininventual', component: LoginComponent },
   {
     path: 'dashboard',
     component: DashboardComponent
@@ -424,6 +324,43 @@ const routes: Routes = [
     path: 'elements',
     component: ElementsComponent
   },
+  //Rutas Motel
+  {
+    path: 'actividadusuarios',
+    component: ActividadUsuariosComponent
+  },
+  {
+    path: 'dashboardmotel',
+    component: DashboardMotelComponent
+  },
+  {
+    path: 'cuartos',
+    component: GestionCuartosComponent
+  },
+  {
+    path: 'empleados',
+    component: GestionEmpleadosComponent
+  },
+  {
+    path: 'productos',
+    component: GestionProductosComponent
+  },
+  {
+    path: 'roles',
+    component: GestionRolesMotelComponent
+  },
+  {
+    path: 'sucursales',
+    component: GestionSucursalesComponent
+  },
+  {
+    path: 'tipocuartos',
+    component: GestionTipoCuartosComponent
+  },
+  {
+    path: 'transacciones',
+    component: GestionTransaccionesComponent
+  },
   { path: '**', component: NotFoundComponent },
 ];
 
@@ -432,4 +369,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

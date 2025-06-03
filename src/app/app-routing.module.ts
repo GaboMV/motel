@@ -71,7 +71,7 @@ import { GestionSucursalesComponent } from './ActivosComponent/vistas/gestion-su
 import { GestionTipoCuartosComponent } from './ActivosComponent/vistas/gestion-tipo-cuartos/gestion-tipo-cuartos.component';
 import { GestionTransaccionesComponent } from './ActivosComponent/vistas/gestion-transacciones/gestion-transacciones.component';
 import { DashboardMotelComponent } from './ActivosComponent/vistas/dashboard/dashboard.component';
-import { GestionRolesMotelComponent } from './ActivosComponent/vistas/gestion-roles/gestion-roles.component';
+import { GestionRolesComponent } from './ActivosComponent/vistas/gestion-roles/gestion-roles.component';
 
 
 const routes: Routes = [
@@ -347,7 +347,7 @@ const routes: Routes = [
   },
   {
     path: 'roles',
-    component: GestionRolesMotelComponent
+    component: GestionRolesComponent
   },
   {
     path: 'sucursales',

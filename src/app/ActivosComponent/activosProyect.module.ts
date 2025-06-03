@@ -52,7 +52,7 @@ import { DashboardMotelComponent } from "./vistas/dashboard/dashboard.component"
 import { GestionCuartosComponent } from "./vistas/gestion-cuartos/gestion-cuartos.component";
 import { GestionEmpleadosComponent } from "./vistas/gestion-empleados/gestion-empleados.component";
 import { GestionProductosComponent } from "./vistas/gestion-productos/gestion-productos.component";
-import { GestionRolesMotelComponent } from "./vistas/gestion-roles/gestion-roles.component";
+import { GestionRolesComponent } from "./vistas/gestion-roles/gestion-roles.component";
 import { GestionSucursalesComponent } from "./vistas/gestion-sucursales/gestion-sucursales.component";
 import { GestionTipoCuartosComponent } from "./vistas/gestion-tipo-cuartos/gestion-tipo-cuartos.component";
 import { GestionTransaccionesComponent } from "./vistas/gestion-transacciones/gestion-transacciones.component";
@@ -118,7 +118,7 @@ import { GestionTransaccionesComponent } from "./vistas/gestion-transacciones/ge
     GestionCuartosComponent,
     GestionEmpleadosComponent,
     GestionProductosComponent,
-    GestionRolesMotelComponent,
+    GestionRolesComponent,
     GestionSucursalesComponent,
     GestionTipoCuartosComponent,
     GestionTransaccionesComponent

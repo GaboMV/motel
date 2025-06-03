@@ -1,10 +1,108 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { roleData, RoleInterface } from '../../servicios/data/roleData';
+import { MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-gestion-roles',
   templateUrl: './gestion-roles.component.html',
-  styleUrls: ['./gestion-roles.component.scss']
+  styleUrls: ['./gestion-roles.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class GestionRolesMotelComponent {
+export class GestionRolesComponent implements OnInit {
+  displayedColumns: string[] = [
+    'select',
+    'nombre',
+    'descripcion',
+    'permisos',
+    'estado',
+    'creado_en',
+    'accion',
+  ];
+  dataSource: MatTableDataSource<RoleInterface>;
+  selection = new SelectionModel<RoleInterface>(true, []);
 
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
+  @ViewChild(MatSort)
+  sort!: MatSort;
+
+  constructor(public dialog: MatDialog) {
+    // Asignamos los datos de roles a la fuente de datos
+    this.dataSource = new MatTableDataSource(roleData);
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  toggleAllRows() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+
+  checkboxLabel(row?: RoleInterface): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+  }
+
+  //sidebar menu activation start
+  menuSidebarActive:boolean=false;
+  myfunction(){
+    this.menuSidebarActive = !this.menuSidebarActive;
+  }
+  //sidebar menu activation end
+
+  addRole() {
+    // Lógica para agregar un nuevo rol
+    console.log('Agregar nuevo rol');
+  }
+
+  editRole(role: RoleInterface) {
+    // Lógica para editar un rol
+    console.log('Editar rol:', role);
+  }
+
+  duplicateRole(role: RoleInterface) {
+    // Lógica para duplicar un rol
+    console.log('Duplicar rol:', role);
+  }
+
+  deleteRole(role: RoleInterface) {
+    // Lógica para eliminar un rol
+    console.log('Eliminar rol:', role);
+  }
+
+  toggleRoleStatus(role: RoleInterface) {
+    // Lógica para cambiar el estado de un rol
+    role.estado = !role.estado;
+    console.log('Cambiar estado del rol:', role);
+  }
+
+  ngOnInit(): void {}
 }

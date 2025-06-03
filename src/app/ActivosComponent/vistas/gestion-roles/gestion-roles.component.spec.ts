@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GestionRolesMotelComponent } from './gestion-roles.component';
+import { GestionRolesComponent } from './gestion-roles.component';
 
 describe('GestionRolesComponent', () => {
-  let component: GestionRolesMotelComponent;
-  let fixture: ComponentFixture<GestionRolesMotelComponent>;
+  let component: GestionRolesComponent;
+  let fixture: ComponentFixture<GestionRolesComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GestionRolesMotelComponent]
+      declarations: [GestionRolesComponent]
     });
-    fixture = TestBed.createComponent(GestionRolesMotelComponent);
+    fixture = TestBed.createComponent(GestionRolesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

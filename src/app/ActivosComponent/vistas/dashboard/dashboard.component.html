@@ -1,1 +1,128 @@
-<p>dashboard works!</p>
+<div class="inventual-dashboard-area">
+    <div class="inventual-dashboard-sidebar" [class.sidebar-enable]="menuSidebarActive">
+        <div class="inventual-header-bar-responsive" (click)="myfunction()">
+            <mat-icon>reorder</mat-icon>
+        </div>
+        <div
+            class="inventual-menu-wrapper bg-white border-e border-b border-solid border-border py-10 px-7 lg:px-5 lg:py-8">
+            <app-side-menu></app-side-menu>
+        </div>
+        <div class="inventual-menu-overlay" (click)="myfunction()" [class.sidebar-enable]="menuSidebarActive"></div>
+    </div>
+    <div class="inventual-dashboard-main" [class.sidebar-enable]="menuSidebarActive">
+        <div class="inventual-header-area">
+            <div class="inventual-header-wrapper custom-height-70 px-7 bg-white border-b border-solid border-border">
+                <div class="grid grid-cols-12 items-center h-full">
+                    <div class="col-span-12">
+                        <app-cabecera></app-cabecera>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="inventual-breadcrumb-area px-7 py-9 bg-white mb-5">
+            <div class="inventual-breadcrumb-area-inner px-0.5">
+                <h5 class="text-[20px] text-heading font-bold mb-3">Cuartos</h5>
+            </div>
+        </div>
+        <div class="inventual-content-area px-7">
+            <div class="grid grid-cols-3 gap-5 sm:grid-cols-1 mb-5">
+                <article *ngFor="let cuarto of dataSource.data"
+                    class="flex max-w-xl flex-col items-start justify-between p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+                    [class.bg-green-200]="cuarto.ocupado === 'Libre'" [class.bg-red-200]="cuarto.ocupado === 'Ocupado'"
+                    [class.bg-orange-200]="cuarto.ocupado === 'Reservado'"
+                    [class.bg-blue-200]="cuarto.ocupado === 'Mantenimiento'"
+                    [class.bg-gray-200]="cuarto.ocupado === 'Limpieza'">
+
+                    <div class="group relative">
+
+                        <div class="flex items-center gap-x-4 text-xs">
+                            <h3 class="mt-3 text-lg/6 font-semibold text-gray-900 group-hover:text-gray-600">
+                                <span class="absolute inset-0"></span>
+                                {{cuarto.nombre}}
+                            </h3>
+                            <div class="table-action-menu-wrap">
+                                <button mat-icon-button [matMenuTriggerFor]="beforeMenu"
+                                    style="background-color: white;" 
+                                    class="common-action-menu-style" aria-label="Example icon-button with a menu">
+                                    Action <mat-icon>arrow_drop_down</mat-icon>
+                                </button>
+                                <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                    <button *ngIf="cuarto.ocupado === 'Libre'" mat-menu-item>
+                                        <img src="../../../../../assets/img/icon/action-2.png" alt="icon not found">
+                                        <span>Reservar</span>
+                                    </button>
+                                    <button *ngIf="cuarto.ocupado === 'Reservado' || cuarto.ocupado === 'Libre'"
+                                        mat-menu-item>
+                                        <img src="../../../../../assets/img/icon/action-5.png" alt="icon not found">
+                                        <span>Ocupar</span>
+                                    </button>
+                                    <button *ngIf="cuarto.ocupado === 'Libre'" mat-menu-item>
+                                        <img src="../../../../../assets/img/icon/action-1.png" alt="icon not found">
+                                        <span>Limpieza</span>
+                                    </button>
+                                    <button *ngIf="cuarto.ocupado === 'Ocupado'" mat-menu-item>
+                                        <img src="../../../../../assets/img/icon/action-5.png" alt="icon not found">
+                                        <span>Check-out</span>
+                                    </button>
+                                    <button *ngIf="cuarto.ocupado === 'Limpieza' || cuarto.ocupado === 'Mantenimiento'"
+                                        mat-menu-item>
+                                        <img src="../../../../../assets/img/icon/action-4.png" alt="icon not found">
+                                        <span>Habilitar cuarto</span>
+                                    </button>
+                                    <button *ngIf="cuarto.ocupado === 'Libre' || cuarto.ocupado === 'Limpieza'"
+                                        mat-menu-item>
+                                        <img src="../../../../../assets/img/icon/action-1.png" alt="icon not found">
+                                        <span>Mantenimiento</span>
+                                    </button>
+                                </mat-menu>
+                            </div>
+                        </div>
+                        <p class="line-clamp-3 text-sm/6 text-gray-800">
+                            {{cuarto.descripcion || 'Sin descripción'}}
+                        </p>
+                        <button (click)="toggleRoleStatus(cuarto)"
+                            class="relative z-10 rounded-full px-3 py-1.5 font-medium hover:bg-slate-300 transition-colors duration-300"
+                            [class.bg-slate-100]="cuarto.estado" [class.bg-red-100]="!cuarto.estado">
+                            {{cuarto.estado ? 'Activo' : 'Inactivo'}}
+                        </button>
+                        <span> | Tipo: {{cuarto.tipo_cuarto_id}}</span>
+                        <p *ngIf="cuarto.ocupado === 'Ocupado'" class="mt-5 line-clamp-3 text-sm/6 text-gray-800">
+                            Productos del cliente:
+                        </p>
+                    </div>
+
+                    <div *ngIf="cuarto.ocupado === 'Ocupado'"
+                        class="group relative bg-white w-full p-4 rounded-lg shadow-md">
+                        <ol>
+                            <li>- Coffee</li>
+                            <li>- Tea</li>
+                            <li>- Milk</li>
+                        </ol>                        
+                        <p *ngIf="cuarto.ocupado === 'Ocupado'" class="mt-1 line-clamp-3 text-sm/6 text-gray-800 text-right font-bold">
+                            Total: 10 Bs
+                        </p>
+                    </div>
+
+                    <div class="relative mt-8 flex items-center gap-x-4">       
+                        <div class="text-sm/6">
+                            <p class="font-semibold text-gray-900">
+                                Estado: {{cuarto.ocupado}}
+                            </p>
+                            <p class="text-gray-600">
+                                Sucursal: {{cuarto.sucursales_id}}
+                            </p>
+                        </div>                 
+                        <button *ngIf="cuarto.ocupado === 'Ocupado'" mat-raised-button color="primary"
+                            [routerLink]="['']"><mat-icon class="mt-2">add_circle_outline</mat-icon>
+                            Agregar Producto</button>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="inventual-copyright-area">
+            <!--
+            <app-copyright></app-copyright>
+            -->
+        </div>
+    </div>
+</div>

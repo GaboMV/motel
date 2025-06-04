@@ -628,3 +628,40 @@
     }
   }
 }
+
+
+
+//modal
+@mixin customModal {
+  .custom-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    @apply flex items-center justify-center;
+    z-index: 1000;
+
+    .custom-modal {
+      background-color: white;
+      border-radius: 8px;
+      width: 400px;
+      max-width: 90%;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+      h2 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      mat-form-field {
+        width: 100%;
+        margin-bottom: 16px;
+      }
+
+      .modal-actions {
+        @apply flex justify-end gap-3 mt-4;
+      }
+    }
+  }
+}

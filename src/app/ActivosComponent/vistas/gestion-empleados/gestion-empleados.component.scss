@@ -1,0 +1,12 @@
+@import '../../../../custom-palettes.scss';
+
+@include inventualSidebarMuneStyle;
+@include inventualInputFieldStyle;
+@include inventualHeaderSearchAction;
+@include inventualMaterialBtn;
+@include commonActionMenuStyle;
+@include inventualMaterialTableStyle;
+
+// Estilos adicionales para estado
+.text-green-500 { color: #10B981; }
+.text-red-500 { color: #EF4444; }

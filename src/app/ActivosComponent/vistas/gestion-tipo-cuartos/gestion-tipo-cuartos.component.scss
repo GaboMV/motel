@@ -1,0 +1,10 @@
+@import '../../../../custom-palettes.scss';
+
+// Mantenemos todos los estilos originales
+@include inventualSidebarMuneStyle;
+@include inventualInputFieldStyle;
+@include inventualHeaderSearchAction;
+@include inventualMaterialBtn;
+@include commonActionMenuStyle;
+@include inventualMaterialTableStyle;
+@include customModal;

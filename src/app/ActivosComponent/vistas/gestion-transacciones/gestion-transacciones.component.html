@@ -1,1 +1,262 @@
-<p>gestion-transacciones works!</p>
+<div class="inventual-dashboard-area">
+  <div class="inventual-dashboard-sidebar" [class.sidebar-enable]="menuSidebarActive">
+    <div class="inventual-header-bar-responsive" (click)="myfunction()">
+      <mat-icon>reorder</mat-icon>
+    </div>
+    <div
+      class="inventual-menu-wrapper bg-white border-e border-b border-solid border-border py-10 px-7 lg:px-5 lg:py-8">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="inventual-menu-overlay" (click)="myfunction()" [class.sidebar-enable]="menuSidebarActive"></div>
+  </div>
+  <div class="inventual-dashboard-main" [class.sidebar-enable]="menuSidebarActive">
+    <div class="inventual-header-area">
+      <div class="inventual-header-wrapper custom-height-70 px-7 bg-white border-b border-solid border-border">
+        <div class="grid grid-cols-12 items-center h-full">
+          <div class="col-span-12">
+            <app-cabecera></app-cabecera>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="inventual-breadcrumb-area px-7 py-9 bg-white mb-5">
+      <div class="inventual-breadcrumb-area-inner px-0.5">
+        <h5 class="text-[20px] text-heading font-bold mb-3">Gestión de transacciones</h5>
+        <div class="inventual-breadcrumb-area-inner-wrap">
+          <span class="text-[14px] text-body font-normal inline-block me-2">Configuración</span>
+          <span class="text-[14px] text-body font-normal inline-block me-2">></span>
+          <span class="text-[14px] text-body font-normal inline-block me-2">Transacciones</span>
+        </div>
+      </div>
+    </div>
+    <div class="inventual-content-area px-7">
+      <div class="inventual-common-material-table bg-white p-7 custom-shadow rounded-8 mb-5">
+        
+        <div class="inventual-table-header-search-area">
+          <div class="grid grid-cols-12 gap-5 mb-7 pb-0.5">
+            <div class="col-span-5 md:col-span-6 sm:col-span-12">
+              <div class="inventual-select-field">
+                <div class="inventual-input-field-style">
+                  <mat-form-field class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden">Filtrar</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Buscar transaccion..." #input>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-7 md:col-span-6 sm:col-span-12">
+              <div class="inventual-table-header-search-action-btn text-end sm:text-start">
+                <button type="button" class="pdf">
+                  <app-pdf-icon></app-pdf-icon>
+                </button>
+                <button type="button" class="csv">
+                  <app-csv-icon></app-csv-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="inventual-common-table">
+          <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                              [checked]="selection.hasValue() && isAllSelected()"
+                              [indeterminate]="selection.hasValue() && !isAllSelected()"
+                              [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="fecha">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> fecha </th>
+              <td mat-cell *matCellDef="let row"> {{row.fecha | date:'yyyy-MM-dd'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="horaEntrada">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Hora de Entrada </th>
+              <td mat-cell *matCellDef="let row"> {{row.horaEntrada | date:'HH:mm' }} </td>
+            </ng-container>
+
+             <ng-container matColumnDef="horaSalida">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Hora de Salida </th>
+              <td mat-cell *matCellDef="let row"> {{row.horaSalida | date:'HH:mm' }} </td>
+            </ng-container>
+
+              <ng-container matColumnDef="ticket">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Ticket </th>
+              <td mat-cell *matCellDef="let row"> {{row.ticket}} </td>
+            </ng-container>
+
+              <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+              <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
+            </ng-container>
+
+              <ng-container matColumnDef="cuarto">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Cuarto </th>
+              <td mat-cell *matCellDef="let row"> {{row.cuarto}} </td>
+            </ng-container>
+
+              <ng-container matColumnDef="empleado">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Empleado </th>
+              <td mat-cell *matCellDef="let row"> {{row.empleado}} </td>
+            </ng-container>
+
+              <ng-container matColumnDef="monto">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Monto </th>
+              <td mat-cell *matCellDef="let row"> {{row.monto}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="estado">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-slide-toggle [checked]="row.estado" (change)="toggleRoleStatus(row)">
+                  {{row.estado ? 'Activo' : 'Inactivo'}}
+                </mat-slide-toggle>
+              </td>
+            </ng-container>
+
+             <ng-container matColumnDef="accion">
+              <th mat-header-cell *matHeaderCellDef> Acciones </th>
+              <td mat-cell *matCellDef="let row">
+                <div class="table-action-menu-wrap">
+                  <button mat-icon-button [matMenuTriggerFor]="beforeMenu"
+                          class="common-action-menu-style" aria-label="Example icon-button with a menu">
+                    Acciones <mat-icon>arrow_drop_down</mat-icon>
+                  </button>
+                  <mat-menu #beforeMenu="matMenu" xPosition="before">
+                    <button mat-menu-item (click)="editType(row)">
+                      <img src="../../../../../assets/img/icon/action-2.png" alt="icon not found">
+                      <span>Editar transaccion</span>
+                    </button>
+                    <button mat-menu-item (click)="deleteType(row)">
+                      <img src="../../../../../assets/img/icon/action-6.png" alt="icon not found">
+                      <span>Eliminar transaccion</span>
+                    </button>
+                  </mat-menu>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+            </tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="8">
+                <div class="table-data-not-found">
+                  <p>No se encontraron roles con "{{input.value}}"</p>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of roles"></mat-paginator>
+        </div>
+      </div>
+    </div>
+    <div class="inventual-copyright-area">
+      <!--
+      <app-copyright></app-copyright>
+      -->
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!--EDIT MODAL -->
+<div class="custom-modal-backdrop" *ngIf="modalEditVisible">
+  <div class="custom-modal">
+    <h2>Editar Transaccion</h2>
+ <mat-form-field class="w-full">
+      <mat-label>Fecha</mat-label>
+      <input matInput type="date" [(ngModel)]="newTransaction.fecha" />
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Hora de entrada</mat-label>
+      <input matInput type="time" [(ngModel)]="newTransaction.horaEntrada" />
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Hora de salida</mat-label>
+      <input matInput type="time" [(ngModel)]="newTransaction.horaSalida" />
+    </mat-form-field>
+
+    <mat-form-field class="w-full">
+      <mat-label>Ticket</mat-label>
+      <input matInput [(ngModel)]="newTransaction.ticket" />
+    </mat-form-field>
+
+     <mat-form-field class="w-full">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="newTransaction.nombre"/>
+    </mat-form-field>
+
+     <mat-form-field class="w-full">
+      <mat-label>Cuarto</mat-label>
+      <input matInput [(ngModel)]="newTransaction.cuarto" />
+    </mat-form-field>
+
+     <mat-form-field class="w-full">
+      <mat-label>Empleado</mat-label>
+      <input matInput [(ngModel)]="newTransaction.empleado"/>
+    </mat-form-field>
+
+     <mat-form-field class="w-full">
+      <mat-label>Monto</mat-label>
+      <input matInput [(ngModel)]="newTransaction.monto">
+    </mat-form-field>
+
+    
+
+    <div class="modal-actions">
+      <button mat-button (click)="closeEditType()">Cancelar</button>
+      <button mat-raised-button color="primary" (click)="saveType()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal de Confirmación de Eliminación -->
+<div class="custom-modal-backdrop" *ngIf="showDeleteConfirm">
+  <div class="custom-modal text-center">
+    <h2>¿Estás seguro de eliminar esta transaccion?</h2>
+    <p class="text-gray-600 mb-4">Esta acción no se puede deshacer.</p>
+    <div class="modal-actions justify-center">
+      <button mat-stroked-button color="warn" (click)="confirmDelete()">Sí, eliminar</button>
+      <button mat-raised-button color="primary" (click)="showDeleteConfirm = false">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Resultado de Eliminación -->
+<div class="custom-modal-backdrop" *ngIf="deleteResult !== null">
+  <div class="custom-modal text-center">
+    <div class="flex justify-center mb-4 text-[48px]">
+      <mat-icon [ngClass]="deleteResult ? 'text-green-500' : 'text-red-500'">
+        {{ deleteResult ? 'check_circle' : 'cancel' }}
+      </mat-icon>
+    </div>
+    <h2 class="mb-2">
+      {{ deleteResult ? 'transaccion eliminada' : 'Error al eliminar la transaccion' }}
+    </h2>
+    <div class="modal-actions justify-center">
+      <button mat-raised-button color="primary" (click)="deleteResult = null">Aceptar</button>
+    </div>
+  </div>
+</div>

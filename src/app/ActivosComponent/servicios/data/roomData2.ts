@@ -12,7 +12,7 @@ export interface RoomInterface {
 export const roomData: RoomInterface[] = [
   {
     id: 1,
-    nombre: 'tematico',
+    nombre: '2b',
     descripcion: 'Cuarto tematico con indumentaria',
     tipo: "dungeon",
     creado_en: new Date('2023-01-15'),
@@ -21,7 +21,7 @@ export const roomData: RoomInterface[] = [
   },
    {
     id: 2,
-    nombre: 'Dungeon',
+    nombre: '1a',
     descripcion: 'Cuarto tipo dungeon con moviliario acorde',
     tipo: "simple compartido",
     creado_en: new Date('2023-01-15'),
@@ -30,7 +30,7 @@ export const roomData: RoomInterface[] = [
   },
   {
     id: 3,
-    nombre: 'simple compartido',
+    nombre: '3a compartido',
     descripcion: 'Cuarto simple con baño compartido',
     tipo: "suite",
     creado_en: new Date('2023-01-15'),
@@ -39,7 +39,7 @@ export const roomData: RoomInterface[] = [
   },
   {
     id: 4,
-    nombre: 'simple privado',
+    nombre: '2b privado',
     descripcion: 'Cuarto simple con baño privado',
     tipo: "simple privado",
     creado_en: new Date('2023-01-15'),

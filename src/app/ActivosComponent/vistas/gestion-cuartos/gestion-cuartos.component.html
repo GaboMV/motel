@@ -205,7 +205,7 @@
 <!--EDIT MODAL -->
 <div class="custom-modal-backdrop" *ngIf="modalEditVisible">
   <div class="custom-modal">
-    <h2>Editar Tipo de Cuarto</h2>
+    <h2>Editar Cuarto</h2>
 
     <mat-form-field class="w-full">
       <mat-label>Nombre</mat-label>
@@ -243,7 +243,7 @@
 <!-- Modal de Confirmación de Eliminación -->
 <div class="custom-modal-backdrop" *ngIf="showDeleteConfirm">
   <div class="custom-modal text-center">
-    <h2>¿Estás seguro de eliminar este tipo de cuarto?</h2>
+    <h2>¿Estás seguro de eliminar este cuarto?</h2>
     <p class="text-gray-600 mb-4">Esta acción no se puede deshacer.</p>
     <div class="modal-actions justify-center">
       <button mat-stroked-button color="warn" (click)="confirmDelete()">Sí, eliminar</button>
@@ -261,7 +261,7 @@
       </mat-icon>
     </div>
     <h2 class="mb-2">
-      {{ deleteResult ? 'Tipo de cuarto eliminado' : 'Error al eliminar el tipo de cuarto' }}
+      {{ deleteResult ? 'Cuarto eliminado' : 'Error al eliminar el Cuarto' }}
     </h2>
     <div class="modal-actions justify-center">
       <button mat-raised-button color="primary" (click)="deleteResult = null">Aceptar</button>

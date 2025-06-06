@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { roleData, RoleInterface } from '../../servicios/data/roleData';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-gestion-roles',
@@ -25,14 +25,28 @@ export class GestionRolesComponent implements OnInit {
   dataSource: MatTableDataSource<RoleInterface>;
   selection = new SelectionModel<RoleInterface>(true, []);
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  @ViewChild(MatSort)
-  sort!: MatSort;
+  // Variables para modales
+  showRoleModal = false;
+  isEditMode = false;
+  currentRoleId: number | null = null;
+  showDeleteModal = false;
+  roleToDelete: RoleInterface | null = null;
 
-  constructor(public dialog: MatDialog) {
-    // Asignamos los datos de roles a la fuente de datos
+  // Formulario reactivo
+  roleForm: FormGroup;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private fb: FormBuilder) {
     this.dataSource = new MatTableDataSource(roleData);
+
+    this.roleForm = this.fb.group({
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      permisos: [[]],
+      estado: [true]
+    });
   }
 
   ngAfterViewInit() {
@@ -79,29 +93,107 @@ export class GestionRolesComponent implements OnInit {
   //sidebar menu activation end
 
   addRole() {
-    // Lógica para agregar un nuevo rol
-    console.log('Agregar nuevo rol');
+    this.isEditMode = false;
+    this.currentRoleId = null;
+    this.roleForm.reset({
+      estado: true,
+      permisos: []
+    });
+    this.showRoleModal = true;
   }
 
   editRole(role: RoleInterface) {
-    // Lógica para editar un rol
-    console.log('Editar rol:', role);
+    this.isEditMode = true;
+    this.currentRoleId = role.id;
+    this.roleForm.patchValue({
+      nombre: role.nombre,
+      descripcion: role.descripcion,
+      permisos: [...role.permisos],
+      estado: role.estado
+    });
+    this.showRoleModal = true;
   }
 
-  duplicateRole(role: RoleInterface) {
-    // Lógica para duplicar un rol
-    console.log('Duplicar rol:', role);
+  saveRole() {
+    if (this.roleForm.invalid) {
+      this.roleForm.markAllAsTouched();
+      return;
+    }
+
+    const formData = this.roleForm.value;
+
+    if (this.isEditMode && this.currentRoleId) {
+      // Editar rol existente
+      const index = this.dataSource.data.findIndex(r => r.id === this.currentRoleId);
+      if (index !== -1) {
+        this.dataSource.data[index] = {
+          ...this.dataSource.data[index],
+          ...formData,
+          id: this.currentRoleId,
+          actualizado_en: new Date()
+        };
+      }
+    } else {
+      // Agregar nuevo rol
+      const newId = Math.max(...this.dataSource.data.map(r => r.id), 0) + 1;
+      const newRole: RoleInterface = {
+        id: newId,
+        nombre: formData.nombre,
+        descripcion: formData.descripcion,
+        permisos: formData.permisos,
+        estado: formData.estado,
+        creado_en: new Date(),
+        actualizado_en: new Date()
+      };
+      this.dataSource.data = [...this.dataSource.data, newRole];
+    }
+
+    this.dataSource._updateChangeSubscription();
+    this.showRoleModal = false;
   }
 
   deleteRole(role: RoleInterface) {
-    // Lógica para eliminar un rol
-    console.log('Eliminar rol:', role);
+    this.roleToDelete = role;
+    this.showDeleteModal = true;
+  }
+
+  confirmDelete() {
+    if (this.roleToDelete) {
+      this.dataSource.data = this.dataSource.data.filter(
+        r => r.id !== this.roleToDelete!.id
+      );
+      this.dataSource._updateChangeSubscription();
+      this.showDeleteModal = false;
+      this.roleToDelete = null;
+    }
+  }
+
+  cancelDelete() {
+    this.showDeleteModal = false;
+    this.roleToDelete = null;
   }
 
   toggleRoleStatus(role: RoleInterface) {
-    // Lógica para cambiar el estado de un rol
     role.estado = !role.estado;
-    console.log('Cambiar estado del rol:', role);
+    role.actualizado_en = new Date();
+    const index = this.dataSource.data.findIndex(r => r.id === role.id);
+    if (index !== -1) {
+      this.dataSource.data[index] = { ...role };
+      this.dataSource._updateChangeSubscription();
+    }
+  }
+
+  duplicateRole(role: RoleInterface) {
+    const newId = Math.max(...this.dataSource.data.map(r => r.id), 0) + 1;
+    const newRole: RoleInterface = {
+      ...role,
+      id: newId,
+      nombre: `${role.nombre} (Copia)`,
+      creado_en: new Date(),
+      actualizado_en: new Date()
+    };
+    this.dataSource.data = [...this.dataSource.data, newRole];
+    this.dataSource._updateChangeSubscription();
   }
 
   ngOnInit(): void {}

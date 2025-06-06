@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
@@ -8,7 +8,8 @@ import { Branch, BRANCH_DATA } from '../../servicios/data/branchData';
 @Component({
   selector: 'app-gestion-sucursales',
   templateUrl: './gestion-sucursales.component.html',
-  styleUrls: ['./gestion-sucursales.component.scss']
+  styleUrls: ['./gestion-sucursales.component.scss'],
+        encapsulation: ViewEncapsulation.None
 })
 export class GestionSucursalesComponent implements OnInit {
   // Propiedades para el sidebar

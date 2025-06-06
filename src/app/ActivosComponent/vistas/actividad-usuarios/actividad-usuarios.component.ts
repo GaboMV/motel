@@ -20,7 +20,6 @@ export class ActividadUsuariosComponent implements OnInit {
     'description',
     'ip',
     'created_at',
-    'accion',
   ];
   dataSource: MatTableDataSource<ActivityLogInterface>;
   selection = new SelectionModel<ActivityLogInterface>(true, []);

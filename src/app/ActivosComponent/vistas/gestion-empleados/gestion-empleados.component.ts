@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
@@ -9,7 +9,8 @@ import { employeeData, EmployeeInterface } from '../../servicios/data/employeeDa
 @Component({
   selector: 'app-gestion-empleados',
   templateUrl: './gestion-empleados.component.html',
-  styleUrls: ['./gestion-empleados.component.scss']
+  styleUrls: ['./gestion-empleados.component.scss'],
+      encapsulation: ViewEncapsulation.None
 })
 export class GestionEmpleadosComponent implements OnInit {
   displayedColumns: string[] = [

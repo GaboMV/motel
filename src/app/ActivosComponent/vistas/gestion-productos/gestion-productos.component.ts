@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProductoInterface, productoData } from '../../servicios/data/productData';
+import { categoriaData, CategoriaInterface } from '../../servicios/data/categoryData';
 
 @Component({
   selector: 'app-gestion-productos',
@@ -28,6 +29,8 @@ export class GestionProductosComponent {
   dataSource: MatTableDataSource<ProductoInterface>;
   selection = new SelectionModel<ProductoInterface>(true, []);
 
+  categorias: CategoriaInterface[] = [];
+
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort)
@@ -35,6 +38,7 @@ export class GestionProductosComponent {
 
   constructor(public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(productoData);
+    this.categorias = categoriaData;
   }
 
   ngAfterViewInit() {
@@ -97,4 +101,76 @@ export class GestionProductosComponent {
   }
 
   ngOnInit(): void { }
+
+  modalEditVisible = false;
+  modalDeleteVisible = false;
+  modalAddVisible = false;
+  modalDeleteResultVisible = false;
+
+  editingProductId: number | null = null;
+
+  newProduct: ProductoInterface = {
+    id: 0,
+    nombre: '',
+    precio: 0,
+    stock: 0,
+    descripcion: null,
+    estado: false,
+    categoria_id: 0
+  };
+
+  openAddModal() {
+    this.modalEditVisible = true;
+  }
+  openEditModal(product: ProductoInterface) {
+    this.editingProductId = product.id;
+    this.newProduct = { ...product }; // Copia los datos del producto a editar
+    this.modalEditVisible = true;
+  }
+  openDeleteModal(product: ProductoInterface) {
+    this.editingProductId = product.id;
+    this.modalDeleteVisible = true;
+  }
+  openDeleteResultModal() {
+    this.modalDeleteResultVisible = true;
+  }
+
+  closeAddModal() {
+    this.modalAddVisible = false;
+  }
+  closeEditModal() {
+    this.modalEditVisible = false;
+  }
+  closeDeleteModal() {
+    this.modalDeleteVisible = false;
+  }
+  closeDeleteResultModal() {
+    this.modalDeleteResultVisible = false;
+  }
+
+  addProduct() {
+    console.log('Nuevo producto:', this.newProduct);
+    this.dataSource.data.push({ ...this.newProduct, id: this.dataSource.data.length + 1 });
+    this.dataSource._updateChangeSubscription(); // Actualiza la tabla
+    this.closeAddModal();
+  }
+  saveProduct() {
+    console.log('Nuevo tipo de cuarto:', this.newProduct);
+    this.closeEditModal();
+  }
+  deleteProduct() {
+    if (this.editingProductId !== null) {
+      const index = this.dataSource.data.findIndex(product => product.id === this.editingProductId);
+      if (index !== -1) {
+        this.dataSource.data.splice(index, 1);
+        this.dataSource._updateChangeSubscription(); // Actualiza la tabla
+      }
+      this.closeDeleteModal();
+      this.openDeleteResultModal();
+    }else{
+      console.error('No se pudo eliminar el producto: ID no encontrado');
+      this.closeDeleteModal();
+    }
+  }
+    
 }

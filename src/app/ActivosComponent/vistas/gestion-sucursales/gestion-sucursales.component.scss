@@ -6,3 +6,20 @@
 @include inventualMaterialBtn;
 @include commonActionMenuStyle;
 @include inventualMaterialTableStyle;
+
+// Agrega esto a gestion-sucursales.component.scss si necesitas estilos específicos
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+}
+
+.modal-container {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+}
+
+// Estilos para los campos del formulario
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}

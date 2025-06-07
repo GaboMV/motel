@@ -56,6 +56,7 @@ import { GestionRolesComponent } from "./vistas/gestion-roles/gestion-roles.comp
 import { GestionSucursalesComponent } from "./vistas/gestion-sucursales/gestion-sucursales.component";
 import { GestionTipoCuartosComponent } from "./vistas/gestion-tipo-cuartos/gestion-tipo-cuartos.component";
 import { GestionTransaccionesComponent } from "./vistas/gestion-transacciones/gestion-transacciones.component";
+import { GestionReservasComponent } from './vistas/gestion-reservas/gestion-reservas.component';
 
 @NgModule({
   imports: [
@@ -121,7 +122,8 @@ import { GestionTransaccionesComponent } from "./vistas/gestion-transacciones/ge
     GestionRolesComponent,
     GestionSucursalesComponent,
     GestionTipoCuartosComponent,
-    GestionTransaccionesComponent
+    GestionTransaccionesComponent,
+    GestionReservasComponent
   ],
 })
 export class ActivosProyectModule {}

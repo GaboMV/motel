@@ -1,0 +1,323 @@
+<div class="inventual-dashboard-area">
+  <div class="inventual-dashboard-sidebar" [class.sidebar-enable]="menuSidebarActive">
+    <div class="inventual-header-bar-responsive" (click)="toggleSidebar()">
+      <mat-icon>reorder</mat-icon>
+    </div>
+    <div class="inventual-menu-wrapper bg-white border-e border-b border-solid border-border py-10 px-7 lg:px-5 lg:py-8">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="inventual-menu-overlay" (click)="toggleSidebar()" [class.sidebar-enable]="menuSidebarActive"></div>
+  </div>
+  <div class="inventual-dashboard-main" [class.sidebar-enable]="menuSidebarActive">
+    <div class="inventual-header-area">
+      <div class="inventual-header-wrapper custom-height-70 px-7 bg-white border-b border-solid border-border">
+        <div class="grid grid-cols-12 items-center h-full">
+          <div class="col-span-12">
+            <app-cabecera></app-cabecera>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="inventual-breadcrumb-area px-7 py-9 bg-white mb-5">
+      <div class="inventual-breadcrumb-area-inner px-0.5">
+        <h5 class="text-[20px] text-heading font-bold mb-3">Gestión de Reservas</h5>
+        <div class="inventual-breadcrumb-area-inner-wrap">
+          <span class="text-[14px] text-body font-normal inline-block me-2">Reservaciones</span>
+          <span class="text-[14px] text-body font-normal inline-block me-2">></span>
+          <span class="text-[14px] text-body font-normal inline-block me-2">Listado</span>
+        </div>
+      </div>
+    </div>
+    <div class="inventual-content-area px-7">
+      <div class="inventual-common-material-table bg-white p-7 custom-shadow rounded-8 mb-5">
+        <div class="inventual-material-btn mb-7">
+          <button mat-raised-button color="primary" (click)="addReserva()">
+            <mat-icon>add_circle_outline</mat-icon>
+            Nueva Reserva
+          </button>
+        </div>
+        <div class="inventual-table-header-search-area">
+          <div class="grid grid-cols-12 gap-5 mb-7 pb-0.5">
+            <div class="col-span-5 md:col-span-6 sm:col-span-12">
+              <div class="inventual-select-field">
+                <div class="inventual-input-field-style">
+                  <mat-form-field class="w-full" [floatLabel]="'always'">
+                    <mat-label class="hidden">Filtrar</mat-label>
+                    <input matInput (keyup)="applyFilter($event)" placeholder="Buscar reserva..." #input>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-7 md:col-span-6 sm:col-span-12">
+              <div class="inventual-table-header-search-action-btn text-end sm:text-start">
+                <button type="button" class="pdf">
+                  <app-pdf-icon></app-pdf-icon>
+                </button>
+                <button type="button" class="csv">
+                  <app-csv-icon></app-csv-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="inventual-common-table">
+          <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                              [checked]="selection.hasValue() && isAllSelected()"
+                              [indeterminate]="selection.hasValue() && !isAllSelected()"
+                              [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()"
+                              (change)="$event ? selection.toggle(row) : null"
+                              [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+              <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nombreCliente">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </th>
+              <td mat-cell *matCellDef="let row"> {{row.nombreCliente}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nombreCuarto">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Cuarto/Sala </th>
+              <td mat-cell *matCellDef="let row"> {{row.nombreCuarto}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="horaInicio">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Inicio </th>
+              <td mat-cell *matCellDef="let row"> {{row.horaInicio | date:'dd/MM/yyyy HH:mm'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="horaFin">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Fin </th>
+              <td mat-cell *matCellDef="let row"> {{row.horaFin | date:'dd/MM/yyyy HH:mm'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="estado">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+              <td mat-cell *matCellDef="let row">
+                <span class="px-2 py-1 rounded-full text-xs" [class]="getEstadoClass(row.estado)">
+                  {{getEstadoName(row.estado)}}
+                </span>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="pagado">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Pago </th>
+              <td mat-cell *matCellDef="let row">
+                <mat-select [(value)]="row.pagado" (selectionChange)="updateReserva(row)" class="w-full">
+                  <mat-option [value]="true">Pagado</mat-option>
+                  <mat-option [value]="false">Pendiente</mat-option>
+                </mat-select>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef> Acciones </th>
+              <td mat-cell *matCellDef="let row">
+                <div class="flex gap-2 flex-wrap">
+                  <button *ngIf="row.estado === 'pendiente'" mat-raised-button color="primary" class="!text-xs !py-1 !px-2"
+                          (click)="confirmReserva(row)">
+                    <mat-icon class="!text-sm !h-4 !w-4">check</mat-icon>
+                    Aceptar
+                  </button>
+                  <button *ngIf="row.estado !== 'cancelada' && row.estado !== 'completada'"
+                          mat-raised-button color="warn" class="!text-xs !py-1 !px-2"
+                          (click)="openCancelConfirmation(row)">
+                    <mat-icon class="!text-sm !h-4 !w-4">close</mat-icon>
+                    Cancelar
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="accion">
+              <th mat-header-cell *matHeaderCellDef> Acciones </th>
+              <td mat-cell *matCellDef="let row">
+                <div class="table-action-menu-wrap">
+                  <button mat-icon-button [matMenuTriggerFor]="beforeMenu"
+                          class="common-action-menu-style" aria-label="Example icon-button with a menu">
+                    Acciones <mat-icon>arrow_drop_down</mat-icon>
+                  </button>
+                  <mat-menu #beforeMenu="matMenu" xPosition="before">
+                    <button mat-menu-item (click)="editReserva(row)">
+                      <img src="../../../../../assets/img/icon/action-2.png" alt="icon not found">
+                      <span>Editar reserva</span>
+                    </button>
+                    <button mat-menu-item (click)="deleteReserva(row)">
+                      <img src="../../../../../assets/img/icon/action-6.png" alt="icon not found">
+                      <span>Eliminar</span>
+                    </button>
+                  </mat-menu>
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+            </tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="10">
+                <div class="table-data-not-found">
+                  <p>No se encontraron reservas con "{{input.value}}"</p>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of reservations"></mat-paginator>
+        </div>
+      </div>
+    </div>
+    <div class="inventual-copyright-area">
+      <!--
+      <app-copyright></app-copyright>
+      -->
+    </div>
+
+    <!-- Modal para agregar/editar reserva -->
+    <div *ngIf="showReservaModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-4">{{isEditMode ? 'Editar Reserva' : 'Agregar Reserva'}}</h3>
+
+          <form [formGroup]="reservaForm" (ngSubmit)="saveReserva()">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <!-- Columna 1 -->
+              <div>
+                <mat-form-field class="w-full">
+                  <mat-label>Nombre del Cliente*</mat-label>
+                  <input matInput formControlName="nombreCliente" required>
+                  <mat-error *ngIf="reservaForm.get('nombreCliente')?.hasError('required')">Este campo es requerido</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-full">
+                  <mat-label>Carnet de Identidad</mat-label>
+                  <input matInput formControlName="carnetCliente">
+                </mat-form-field>
+              </div>
+
+              <!-- Columna 2 -->
+              <div>
+                <mat-form-field class="w-full">
+                  <mat-label>Cuarto/Sala*</mat-label>
+                  <input matInput formControlName="nombreCuarto" required>
+                  <mat-error *ngIf="reservaForm.get('nombreCuarto')?.hasError('required')">Este campo es requerido</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <mat-form-field class="w-full">
+                <mat-label>Fecha y Hora de Inicio*</mat-label>
+                <input matInput type="datetime-local" formControlName="horaInicio" required>
+                <mat-error *ngIf="reservaForm.get('horaInicio')?.hasError('required')">Este campo es requerido</mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="w-full">
+                <mat-label>Fecha y Hora de Fin*</mat-label>
+                <input matInput type="datetime-local" formControlName="horaFin" required>
+                <mat-error *ngIf="reservaForm.get('horaFin')?.hasError('required')">Este campo es requerido</mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <mat-form-field class="w-full">
+                <mat-label>Estado*</mat-label>
+                <mat-select formControlName="estado" required>
+                  <mat-option value="pendiente">Pendiente</mat-option>
+                  <mat-option value="confirmada">Confirmada</mat-option>
+                  <mat-option value="en-curso">En Curso</mat-option>
+                  <mat-option value="completada">Completada</mat-option>
+                  <mat-option value="cancelada">Cancelada</mat-option>
+                </mat-select>
+                <mat-error *ngIf="reservaForm.get('estado')?.hasError('required')">Seleccione un estado</mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="w-full">
+                <mat-label>Estado de Pago</mat-label>
+                <mat-select formControlName="pagado">
+                  <mat-option [value]="false">Pendiente</mat-option>
+                  <mat-option [value]="true">Pagado</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <mat-form-field class="w-full mb-4">
+              <mat-label>Detalles</mat-label>
+              <textarea matInput formControlName="detalles" rows="3"></textarea>
+            </mat-form-field>
+
+            <div class="flex justify-end space-x-3 mt-6">
+              <button type="button" mat-stroked-button (click)="showReservaModal = false">
+                Cancelar
+              </button>
+              <button type="submit" mat-raised-button color="primary" [disabled]="reservaForm.invalid">
+                {{isEditMode ? 'Actualizar' : 'Guardar'}}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para confirmar eliminación -->
+    <div *ngIf="showDeleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-4">Confirmar Eliminación</h3>
+          <p class="mb-6">¿Estás seguro que deseas eliminar la reserva #{{reservaToDelete?.id}}?</p>
+
+          <div class="flex justify-end space-x-3">
+            <button mat-stroked-button (click)="cancelDelete()">
+              Cancelar
+            </button>
+            <button mat-raised-button color="warn" (click)="confirmDelete()">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal para confirmar cancelación de reserva -->
+    <div *ngIf="showCancelConfirmationModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-4">Confirmar Cancelación</h3>
+          <p class="mb-2">¿Estás seguro que deseas cancelar la siguiente reserva?</p>
+          <div class="mb-4 pl-4 border-l-4 border-gray-200">
+            <p><strong>Reserva #:</strong> {{reservaToCancel?.id}}</p>
+            <p><strong>Cliente:</strong> {{reservaToCancel?.nombreCliente}}</p>
+            <p><strong>Cuarto:</strong> {{reservaToCancel?.nombreCuarto}}</p>
+            <p><strong>Fecha:</strong> {{reservaToCancel?.horaInicio | date:'dd/MM/yyyy HH:mm'}}</p>
+          </div>
+          <p class="mb-6 text-red-600 font-medium">Esta acción no se puede deshacer.</p>
+
+          <div class="flex justify-end space-x-3">
+            <button mat-stroked-button (click)="cancelCancel()">
+              Volver
+            </button>
+            <button mat-raised-button color="warn" (click)="confirmCancel()">
+              Confirmar Cancelación
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

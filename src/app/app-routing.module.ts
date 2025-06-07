@@ -72,6 +72,7 @@ import { GestionTipoCuartosComponent } from './ActivosComponent/vistas/gestion-t
 import { GestionTransaccionesComponent } from './ActivosComponent/vistas/gestion-transacciones/gestion-transacciones.component';
 import { DashboardMotelComponent } from './ActivosComponent/vistas/dashboard/dashboard.component';
 import { GestionRolesComponent } from './ActivosComponent/vistas/gestion-roles/gestion-roles.component';
+import { GestionReservasComponent } from './ActivosComponent/vistas/gestion-reservas/gestion-reservas.component';
 
 
 const routes: Routes = [
@@ -360,6 +361,10 @@ const routes: Routes = [
   {
     path: 'transacciones',
     component: GestionTransaccionesComponent
+  },
+  {
+    path: 'reservas',
+    component: GestionReservasComponent
   },
   { path: '**', component: NotFoundComponent },
 ];

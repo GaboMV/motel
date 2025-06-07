@@ -42,35 +42,38 @@
                             </h3>
                             <div class="table-action-menu-wrap">
                                 <button mat-icon-button [matMenuTriggerFor]="beforeMenu"
-                                    style="background-color: white;" 
-                                    class="common-action-menu-style" aria-label="Example icon-button with a menu">
+                                    style="background-color: white;" class="common-action-menu-style"
+                                    aria-label="Example icon-button with a menu">
                                     Action <mat-icon>arrow_drop_down</mat-icon>
                                 </button>
                                 <mat-menu #beforeMenu="matMenu" xPosition="before">
-                                    <button *ngIf="cuarto.ocupado === 'Libre'" mat-menu-item>
+                                    <button *ngIf="cuarto.ocupado === 'Libre'" mat-menu-item
+                                        (click)="openEditReservaModal()">
                                         <img src="../../../../../assets/img/icon/action-2.png" alt="icon not found">
                                         <span>Reservar</span>
                                     </button>
                                     <button *ngIf="cuarto.ocupado === 'Reservado' || cuarto.ocupado === 'Libre'"
-                                        mat-menu-item>
+                                        mat-menu-item (click)="confirmOcupar()">
                                         <img src="../../../../../assets/img/icon/action-5.png" alt="icon not found">
                                         <span>Ocupar</span>
                                     </button>
-                                    <button *ngIf="cuarto.ocupado === 'Libre'" mat-menu-item>
+                                    <button *ngIf="cuarto.ocupado === 'Libre'" mat-menu-item
+                                        (click)="confirmLimpieza()">
                                         <img src="../../../../../assets/img/icon/action-1.png" alt="icon not found">
                                         <span>Limpieza</span>
                                     </button>
-                                    <button *ngIf="cuarto.ocupado === 'Ocupado'" mat-menu-item>
+                                    <button *ngIf="cuarto.ocupado === 'Ocupado'" mat-menu-item
+                                        (click)="confirmCheckout()">
                                         <img src="../../../../../assets/img/icon/action-5.png" alt="icon not found">
                                         <span>Check-out</span>
                                     </button>
                                     <button *ngIf="cuarto.ocupado === 'Limpieza' || cuarto.ocupado === 'Mantenimiento'"
-                                        mat-menu-item>
+                                        mat-menu-item (click)="confirmHabilitar()">
                                         <img src="../../../../../assets/img/icon/action-4.png" alt="icon not found">
                                         <span>Habilitar cuarto</span>
                                     </button>
                                     <button *ngIf="cuarto.ocupado === 'Libre' || cuarto.ocupado === 'Limpieza'"
-                                        mat-menu-item>
+                                        mat-menu-item (click)="confirmLimpieza()">
                                         <img src="../../../../../assets/img/icon/action-1.png" alt="icon not found">
                                         <span>Mantenimiento</span>
                                     </button>
@@ -89,21 +92,82 @@
                         <p *ngIf="cuarto.ocupado === 'Ocupado'" class="mt-5 line-clamp-3 text-sm/6 text-gray-800">
                             Productos del cliente:
                         </p>
+                        <p *ngIf="cuarto.ocupado === 'Reservado'" class="mt-5 line-clamp-3 text-sm/6 text-gray-800">
+                            Reservas:
+                        </p>
                     </div>
 
                     <div *ngIf="cuarto.ocupado === 'Ocupado'"
                         class="group relative bg-white w-full p-4 rounded-lg shadow-md">
                         <ol>
-                            <li>- Coffee</li>
-                            <li>- Tea</li>
-                            <li>- Milk</li>
-                        </ol>                        
-                        <p *ngIf="cuarto.ocupado === 'Ocupado'" class="mt-1 line-clamp-3 text-sm/6 text-gray-800 text-right font-bold">
+                            <li>- 1 Coffee 3 Bs</li>
+                            <li>- 1 Tea 2 Bs</li>
+                            <li>- 1 Milk 5 Bs</li>
+                        </ol>
+                        <p *ngIf="cuarto.ocupado === 'Ocupado'"
+                            class="mt-1 line-clamp-3 text-sm/6 text-gray-800 text-right font-bold">
                             Total: 10 Bs
                         </p>
                     </div>
 
-                    <div class="relative mt-8 flex items-center gap-x-4">       
+                    <div *ngIf="cuarto.ocupado === 'Reservado'"
+                        class="group relative bg-white w-full p-4 rounded-lg shadow-md">
+                        <ol>
+                            <li>
+                                <div class="flex justify-between items-center m-1">
+                                    <div>
+                                        - 10:30-11:30, María García (7654321SC)
+                                    </div>
+                                    <div class="flex space-x-1">
+                                        <button mat-mini-fab color="primary" class="!w-8 !h-8" aria-label="Agregar" (click)="openEditReservaModal(cuarto)">
+                                            <mat-icon
+                                                class="!text-base !flex !items-center !justify-center">edit</mat-icon>
+                                        </button>
+                                        <button mat-mini-fab color="warn" class="!w-8 !h-8" aria-label="Eliminar" (click)="confirmCancelReserva()">
+                                            <mat-icon
+                                                class="!text-base !flex !items-center !justify-center">delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="flex justify-between items-center m-1">
+                                    <div>
+                                        - 16:15-18:15, Juan Pérez (1234567LP)
+                                    </div>
+                                    <div class="flex space-x-1">
+                                        <button mat-mini-fab color="primary" class="!w-8 !h-8" aria-label="Agregar" (click)="openEditReservaModal(cuarto)">
+                                            <mat-icon
+                                                class="!text-base !flex !items-center !justify-center">edit</mat-icon>
+                                        </button>
+                                        <button mat-mini-fab color="warn" class="!w-8 !h-8" aria-label="Eliminar" (click)="confirmCancelReserva()">
+                                            <mat-icon
+                                                class="!text-base !flex !items-center !justify-center">delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="flex justify-between items-center m-1">
+                                    <div>
+                                        - 09:00-11:00, Ana Rodríguez (3456789OR)
+                                    </div>
+                                    <div class="flex space-x-1">
+                                        <button mat-mini-fab color="primary" class="!w-8 !h-8" aria-label="Agregar" (click)="openEditReservaModal(cuarto)">
+                                            <mat-icon
+                                                class="!text-base !flex !items-center !justify-center">edit</mat-icon>
+                                        </button>
+                                        <button mat-mini-fab color="warn" class="!w-8 !h-8" aria-label="Eliminar" (click)="confirmCancelReserva()">
+                                            <mat-icon
+                                                class="!text-base !flex !items-center !justify-center">delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="relative mt-8 flex items-center gap-x-4">
                         <div class="text-sm/6">
                             <p class="font-semibold text-gray-900">
                                 Estado: {{cuarto.ocupado}}
@@ -111,9 +175,9 @@
                             <p class="text-gray-600">
                                 Sucursal: {{cuarto.sucursales_id}}
                             </p>
-                        </div>                 
+                        </div>
                         <button *ngIf="cuarto.ocupado === 'Ocupado'" mat-raised-button color="primary"
-                            [routerLink]="['']"><mat-icon class="mt-2">add_circle_outline</mat-icon>
+                            (click)="openAddProductoModal()"><mat-icon class="mt-2">add_circle_outline</mat-icon>
                             Agregar Producto</button>
                     </div>
                 </article>
@@ -123,6 +187,263 @@
             <!--
             <app-copyright></app-copyright>
             -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Edición de Reserva -->
+<div class="custom-modal-backdrop" *ngIf="modalEditReservaVisible">
+    <div class="custom-modal">
+        <h2>{{ editingReservaId ? 'Editar Reserva' : 'Nueva Reserva' }}</h2>
+
+        <mat-form-field class="w-full">
+            <mat-label>Fecha/Hora Inicio</mat-label>
+            <input matInput type="datetime-local" [(ngModel)]="reserva.hora_inicio" required />
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Fecha/Hora Final</mat-label>
+            <input matInput type="datetime-local" [(ngModel)]="reserva.hora_final" required />
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Detalles</mat-label>
+            <textarea matInput [(ngModel)]="reserva.detalles"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Estado</mat-label>
+            <mat-select [(ngModel)]="reserva.estado" required>
+                <mat-option [value]="true">Activa</mat-option>
+                <mat-option [value]="false">Cancelada</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Cuarto</mat-label>
+            <mat-select [(ngModel)]="reserva.cuartos_id" required>
+                <mat-option *ngFor="let cuarto of dataSource.data" [value]="cuarto.id">
+                    {{ cuarto.nombre }} - Tipo: {{ cuarto.tipo_cuarto_id }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="modal-actions">
+            <button mat-button (click)="closeEditReservaModal()">Cancelar</button>
+            <button mat-raised-button color="primary" (click)="saveReserva()">
+                {{ editingReservaId ? 'Actualizar' : 'Reservar' }}
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Confirmación de Cancelación de Reserva -->
+<div class="custom-modal-backdrop" *ngIf="modalCancelReservaVisible">
+    <div class="custom-modal text-center">
+        <h2>¿Estás seguro de cancelar esta reserva?</h2>
+        <p class="text-gray-600 mb-4">Esta acción no se puede deshacer.</p>
+        <div class="modal-actions justify-center">
+            <button mat-stroked-button color="warn" (click)="confirmCancelReserva()">Sí, cancelar</button>
+            <button mat-raised-button color="primary" (click)="closeCancelReservaModal()">No, mantener</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Agregar Productos a Transacción -->
+<div class="custom-modal-backdrop" *ngIf="modalAddProductoVisible">
+    <div class="custom-modal">
+        <h2>Agregar Productos a Transacción</h2>
+
+        <mat-form-field class="w-full">
+            <mat-label>Buscar Producto</mat-label>
+            <input type="text" matInput [formControl]="productoControl" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onProductoSelected($event)">
+                <mat-option *ngFor="let producto of productosFiltrados | async" [value]="producto.nombre">
+                    {{ producto.nombre }} - ${{ producto.precio }} (Stock: {{ producto.stock }})
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <div *ngIf="productoSeleccionado" class="mb-4">
+            <mat-form-field class="w-full">
+                <mat-label>Cantidad</mat-label>
+                <input matInput type="number" [(ngModel)]="cantidadProducto" min="1"
+                    [max]="productoSeleccionado.stock" />
+            </mat-form-field>
+
+            <div class="flex justify-between items-center">
+                <span>Precio unitario: ${{ productoSeleccionado.precio }}</span>
+                <span class="font-bold">Subtotal: ${{ (productoSeleccionado.precio * (cantidadProducto || 0)).toFixed(2)
+                    }}</span>
+            </div>
+        </div>
+
+        <div class="modal-actions">
+            <button mat-button (click)="closeAddProductoModal()">Cancelar</button>
+            <button mat-raised-button color="primary" (click)="addProductoToTransaccion()"
+                [disabled]="!productoSeleccionado || !cantidadProducto || cantidadProducto <= 0">
+                Agregar a Transacción
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Confirmación de Enviar a Limpieza -->
+<div class="custom-modal-backdrop" *ngIf="modalLimpiezaVisible">
+    <div class="custom-modal text-center">
+        <h2>¿Enviar este cuarto a limpieza?</h2>
+        <p class="text-gray-600 mb-4">El cuarto no estará disponible hasta que se complete la limpieza.</p>
+        <div class="modal-actions justify-center">
+            <button mat-stroked-button color="warn" (click)="confirmLimpieza()">Sí, enviar</button>
+            <button mat-raised-button color="primary" (click)="closeLimpiezaModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Confirmación de Habilitar Cuarto -->
+<div class="custom-modal-backdrop" *ngIf="modalHabilitarVisible">
+    <div class="custom-modal text-center">
+        <h2>¿Habilitar este cuarto?</h2>
+        <p class="text-gray-600 mb-4">El cuarto estará disponible para nuevas reservas.</p>
+        <div class="modal-actions justify-center">
+            <button mat-stroked-button color="primary" (click)="confirmHabilitar()">Sí, habilitar</button>
+            <button mat-raised-button color="warn" (click)="closeHabilitarModal()">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Ocupar Cuarto -->
+<div class="custom-modal-backdrop" *ngIf="modalOcuparVisible">
+    <div class="custom-modal">
+        <h2>Ocupar Cuarto</h2>
+
+        <h3 class="mb-2">Datos del Cliente</h3>
+        <mat-form-field class="w-full">
+            <mat-label>Nombre</mat-label>
+            <input matInput [(ngModel)]="cliente.nombre" required />
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Cédula</mat-label>
+            <input matInput [(ngModel)]="cliente.camet" />
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Teléfono</mat-label>
+            <input matInput [(ngModel)]="cliente.telefono" required />
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Correo</mat-label>
+            <input matInput type="email" [(ngModel)]="cliente.correo" />
+        </mat-form-field>
+
+        <h3 class="mb-2 mt-4">Datos de la Transacción</h3>
+        <mat-form-field class="w-full">
+            <mat-label>Monto Total</mat-label>
+            <input matInput type="number" [(ngModel)]="transaccion.monto_total" required />
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Hora de Entrada</mat-label>
+            <input matInput type="datetime-local" [(ngModel)]="transaccion.hora_entrada" required />
+        </mat-form-field>
+
+        <div class="modal-actions">
+            <button mat-button (click)="closeOcuparModal()">Cancelar</button>
+            <button mat-raised-button color="primary" (click)="confirmOcupar()">Ocupar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Checkout (Actualizado) -->
+<div class="custom-modal-backdrop" *ngIf="modalCheckoutVisible">
+    <div class="custom-modal">
+        <h2>Checkout</h2>
+
+        <div class="mb-4">
+            <h3>Resumen de la estadía</h3>
+            <p>Hora entrada: 9:30</p>
+            <p>Tiempo: 1 Hr</p>
+            <p>Tarifa base: 100 Bs/Hr</p>
+
+            <h4 class="mt-3">Productos consumidos:</h4>
+            <mat-list>
+                <mat-list-item *ngFor="let item of productosTransaccion">
+                    <span class="flex-1">{{ item.producto.nombre }}</span>
+                    <span class="mx-2">x{{ item.cantidad }}</span>
+                    <span>${{ (item.producto.precio * item.cantidad).toFixed(2) }}</span>
+                </mat-list-item>
+            </mat-list>
+
+            <div class="mt-3 border-t pt-2">
+                <p class="font-bold">Total productos: ${{ totalProductos.toFixed(2) }}</p>
+                <p class="font-bold text-lg">Total a pagar: 100 Bs
+                </p>
+            </div>
+        </div>
+
+        <mat-form-field class="w-full">
+            <mat-label>Hora de Salida</mat-label>
+            <input matInput type="datetime-local" [(ngModel)]="transaccion.hora_salida" required />
+        </mat-form-field>
+
+        <div class="modal-actions">
+            <button mat-button (click)="closeCheckoutModal()">Cancelar</button>
+            <button mat-raised-button color="primary" (click)="confirmCheckout()">Finalizar Checkout</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Solicitud de Reserva por Cliente -->
+<div class="custom-modal-backdrop" *ngIf="modalSolicitudReservaVisible">
+    <div class="custom-modal">
+        <h2>Solicitud de Reserva</h2>
+
+        <h3 class="mb-2">Datos del Cliente</h3>
+        <mat-form-field class="w-full">
+            <mat-label>Nombre</mat-label>
+            <input matInput [(ngModel)]="cliente.nombre" required />
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Cédula</mat-label>
+            <input matInput [(ngModel)]="cliente.camet" />
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Teléfono</mat-label>
+            <input matInput [(ngModel)]="cliente.telefono" required />
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Correo</mat-label>
+            <input matInput type="email" [(ngModel)]="cliente.correo" />
+        </mat-form-field>
+
+        <h3 class="mb-2 mt-4">Datos de la Reserva</h3>
+        <mat-form-field class="w-full">
+            <mat-label>Fecha/Hora Inicio</mat-label>
+            <input matInput type="datetime-local" [(ngModel)]="reserva.hora_inicio" required />
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Fecha/Hora Final</mat-label>
+            <input matInput type="datetime-local" [(ngModel)]="reserva.hora_final" required />
+        </mat-form-field>
+
+        <mat-form-field class="w-full">
+            <mat-label>Tipo de Cuarto</mat-label>
+            <mat-select [(ngModel)]="reserva.cuartos_id" required>
+                <mat-option *ngFor="let cuarto of dataSource.data" [value]="cuarto.id">
+                    {{ cuarto.nombre }} - Tipo: {{ cuarto.tipo_cuarto_id }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="modal-actions">
+            <button mat-button (click)="closeSolicitudReservaModal()">Cancelar</button>
+            <button mat-raised-button color="primary" (click)="confirmSolicitudReserva()">Solicitar Reserva</button>
         </div>
     </div>
 </div>

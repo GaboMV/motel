@@ -5,7 +5,12 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import * as Papa from 'papaparse'
 
+//import * as Papa from 'papaparse';
 
 @Component({
   selector: 'app-gestion-tipo-cuartos',
@@ -167,5 +172,89 @@ saveType() {
   console.log('Nuevo tipo de cuarto:', this.newTransaction);
   this.closeEditType();
 }
-  ngOnInit(): void {}
+
+fechaSeleccionada: Date | null = null;
+dataOriginal: any[] = []; // Contendrá todas las transacciones
+sumaMontos: number = 0;
+  ngOnInit(): void {
+     this.dataOriginal = [...this.dataSource.data]; 
+  this.dataSource.filterPredicate = this.customFilterPredicate();
+  }
+  customFilterPredicate(): (data: any, filter: string) => boolean {
+  return (data: any, filter: string): boolean => {
+    if (!this.fechaSeleccionada) return true;
+    const fechaData = new Date(data.fecha).toDateString();
+    const fechaFiltro = this.fechaSeleccionada.toDateString();
+    return fechaData === fechaFiltro;
+  };
+}
+
+// Aplica filtro por fecha
+filtrarPorFecha(event: MatDatepickerInputEvent<Date>) {
+  this.fechaSeleccionada = event.value;
+  this.dataSource.filter = '' + Math.random(); 
+  this.calcularSumaMontos();
+}
+
+calcularSumaMontos() {
+  this.sumaMontos = this.dataSource.filteredData.reduce((acc, item) => acc + Number(item.monto), 0);
+}
+showCSV=false;
+showPDF=false;
+generarPDF() {
+  this.showPDF=true;
+  const doc = new jsPDF();
+  const data = this.dataSource.filteredData;
+
+  const rows = data.map(t => [
+    t.fecha, t.horaEntrada, t.horaSalida, t.ticket,
+    t.nombre, t.cuarto, t.empleado, t.monto
+  ]);
+
+  const totalMonto = this.sumaMontos;
+
+  doc.text('Reporte de Transacciones', 14, 15);
+  (doc as any).autoTable({
+    startY: 20,
+    head: [['Fecha', 'Entrada', 'Salida', 'Ticket', 'Nombre', 'Cuarto', 'Empleado', 'Monto']],
+    body: rows
+  });
+
+  doc.text(`Total Monto: BOB ${totalMonto.toFixed(2)}`, 14, (doc as any).lastAutoTable.finalY + 10);
+
+  doc.save('reporte_transacciones.pdf');
+}
+closePdf() {
+    this.showPDF = false;
+    
+  }
+generarCSV() {
+  this.showCSV=true;
+  const data = this.dataSource.filteredData;
+  const csvData = data.map(t => ({
+    Fecha: t.fecha,
+    Entrada: t.horaEntrada,
+    Salida: t.horaSalida,
+    Ticket: t.ticket,
+    Nombre: t.nombre,
+    Cuarto: t.cuarto,
+    Empleado: t.empleado,
+    Monto: t.monto
+  }));
+const Papa = require('papaparse');
+  const csv = Papa.unparse(csvData);
+  const blob = new Blob([csv + `\nTotal Monto,${this.sumaMontos}`], { type: 'text/csv;charset=utf-8;' });
+
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.setAttribute('download', 'reporte_transacciones.csv');
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+   closeCsv() {
+    this.showCSV = false;
+    
+  }
+
 }

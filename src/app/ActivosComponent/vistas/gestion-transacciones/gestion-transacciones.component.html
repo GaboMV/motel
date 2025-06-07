@@ -41,15 +41,21 @@
                     <mat-label class="hidden">Filtrar</mat-label>
                     <input matInput (keyup)="applyFilter($event)" placeholder="Buscar transaccion..." #input>
                   </mat-form-field>
+<mat-form-field  class="w-full">
+  <input matInput [matDatepicker]="picker" (dateChange)="filtrarPorFecha($event)" placeholder="dd-mm-yyyy">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
                 </div>
               </div>
             </div>
             <div class="col-span-7 md:col-span-6 sm:col-span-12">
               <div class="inventual-table-header-search-action-btn text-end sm:text-start">
-                <button type="button" class="pdf">
+                <button type="button" class="pdf" (click)="generarPDF()">
                   <app-pdf-icon></app-pdf-icon>
                 </button>
-                <button type="button" class="csv">
+                <button type="button" class="csv" (click)="generarCSV()">
                   <app-csv-icon></app-csv-icon>
                 </button>
               </div>
@@ -146,6 +152,7 @@
                   </mat-menu>
                 </div>
               </td>
+              
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -160,6 +167,9 @@
                 </div>
               </td>
             </tr>
+            <div class="text-end font-semibold mt-3">
+  <span>Total Monto: {{ sumaMontos | currency:'BOB':'symbol':'1.2-2' }}</span>
+</div>
           </table>
 
           <mat-paginator [pageSizeOptions]="[5, 10, 25]" aria-label="Select page of roles"></mat-paginator>
@@ -257,6 +267,27 @@
     </h2>
     <div class="modal-actions justify-center">
       <button mat-raised-button color="primary" (click)="deleteResult = null">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="custom-modal-backdrop" *ngIf="showCSV">
+  <div class="custom-modal text-center">
+      <mat-icon >download</mat-icon>
+    <h2>Se acaba de descargar un reporte csv de las transacciones realzadas en la fecha seleccionada en el filtro</h2>
+    <div class="modal-actions justify-center">
+      <button mat-stroked-button color="primary" (click)="closeCsv()">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+<div class="custom-modal-backdrop" *ngIf="showPDF">
+  <div class="custom-modal text-center">
+     <mat-icon >download</mat-icon>
+    <h2>Se acaba de descargar un reporte pdf de las transacciones realzadas en la fecha seleccionada en el filtro</h2>
+    <div class="modal-actions justify-center">
+      <button mat-stroked-button color="primary" (click)="closePdf()">Aceptar</button>
     </div>
   </div>
 </div>

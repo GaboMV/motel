@@ -5,44 +5,63 @@
 
       <div class="inventual-notify-dropdown" [class.notifydropdown-enable]="notifyShortcutActive">
         <div class="inventual-notify-dropdown-wrapper px-4 border border-border border-solid">
+          <!-- Notificación 1: Nueva reserva -->
           <div class="inventual-notify-dropdown-list py-4 flex items-center border-b border-border border-solid">
             <div class="inventual-notify-img">
-              <a [routerLink]="['/message']"><img src="../../../../assets/img/user/user-1.png" alt="img not found"></a>
+              <a [routerLink]="['/reservas']">
+                <mat-icon class="text-blue-500">event_available</mat-icon>
+              </a>
             </div>
             <div class="inventual-notify-text">
-              <h6><a [routerLink]="['/message']">Alex Send you Message</a></h6>
-              <span>31 Dec 2022 - 02:26 PM</span>
+              <h6><a [routerLink]="['/reservas']">Nueva reserva confirmada</a></h6>
+              <span>Juan Pérez - Suite Presidencial (15 Jun 2023 14:00-16:00)</span>
             </div>
           </div>
+
+          <!-- Notificación 2: Reserva en curso -->
           <div class="inventual-notify-dropdown-list py-4 flex items-center border-b border-border border-solid">
             <div class="inventual-notify-img">
-              <a [routerLink]="['/message']"><img src="../../../../assets/img/user/user-2.png" alt="img not found"></a>
+              <a [routerLink]="['/reservas']">
+                <mat-icon class="text-green-500">hourglass_top</mat-icon>
+              </a>
             </div>
             <div class="inventual-notify-text">
-              <h6><a [routerLink]="['/message']">Peter Send you Message</a></h6>
-              <span>31 Dec 2022 - 08:36 PM</span>
+              <h6><a [routerLink]="['/reservas']">Reserva en curso</a></h6>
+              <span>María García - Hab. Ejecutiva (16 Jun 18:00 - 17 Jun 10:00)</span>
             </div>
           </div>
+
+          <!-- Notificación 3: Pago pendiente -->
           <div class="inventual-notify-dropdown-list py-4 flex items-center border-b border-border border-solid">
             <div class="inventual-notify-img">
-              <a [routerLink]="['/message']"><img src="../../../../assets/img/user/user-3.png" alt="img not found"></a>
+              <a [routerLink]="['/reservas']">
+                <mat-icon class="text-yellow-500">payment</mat-icon>
+              </a>
             </div>
             <div class="inventual-notify-text">
-              <h6><a [routerLink]="['/message']">Resport created successfully</a></h6>
-              <span>31 Dec 2022 - 04:45 PM</span>
+              <h6><a [routerLink]="['/reservas']">Pago pendiente</a></h6>
+              <span>Empresa XYZ - Sala Conferencias (20 Jun 10:00-12:00)</span>
             </div>
           </div>
+
+          <!-- Notificación 4: Reserva completada -->
           <div class="inventual-notify-dropdown-list py-4 flex items-center border-b border-border border-solid">
             <div class="inventual-notify-img">
-              <a [routerLink]="['/message']"><img src="../../../../assets/img/user/user-4.png" alt="img not found"></a>
+              <a [routerLink]="['/reservas']">
+                <mat-icon class="text-gray-500">done_all</mat-icon>
+              </a>
             </div>
             <div class="inventual-notify-text">
-              <h6><a [routerLink]="['/message']">Jhon Send you Message</a></h6>
-              <span>31 Dec 2022 - 07:30 AM</span>
+              <h6><a [routerLink]="['/reservas']">Reserva completada</a></h6>
+              <span>Carlos López - Hab. Estándar (18 Jun 20:00 - 19 Jun 08:00)</span>
             </div>
           </div>
+
+          <!-- Enlace para ver todas las reservas -->
           <div class="inventual-notify-dropdown-list py-4 flex items-center justify-center">
-            <a [routerLink]="['/message']" class="text-[14px] text-body inline-block">See all <mat-icon>arrow_forward</mat-icon></a>
+            <a [routerLink]="['/reservas']" class="text-[14px] text-body inline-block">
+              Ver todas las reservas <mat-icon>arrow_forward</mat-icon>
+            </a>
           </div>
         </div>
       </div>

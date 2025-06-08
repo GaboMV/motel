@@ -57,6 +57,10 @@ import { GestionSucursalesComponent } from "./vistas/gestion-sucursales/gestion-
 import { GestionTipoCuartosComponent } from "./vistas/gestion-tipo-cuartos/gestion-tipo-cuartos.component";
 import { GestionTransaccionesComponent } from "./vistas/gestion-transacciones/gestion-transacciones.component";
 import { GestionReservasComponent } from './vistas/gestion-reservas/gestion-reservas.component';
+import { EmpleadosDialogComponent } from './dialogs/empleados-dialog/empleados-dialog.component';
+import { RolesDialogComponent } from './dialogs/roles-dialog/roles-dialog.component';
+import { SucursalesDialogComponent } from './dialogs/sucursales-dialog/sucursales-dialog.component';
+import { ReservasDialogComponent } from './dialogs/reservas-dialog/reservas-dialog.component';
 
 @NgModule({
   imports: [
@@ -123,7 +127,11 @@ import { GestionReservasComponent } from './vistas/gestion-reservas/gestion-rese
     GestionSucursalesComponent,
     GestionTipoCuartosComponent,
     GestionTransaccionesComponent,
-    GestionReservasComponent
+    GestionReservasComponent,
+    EmpleadosDialogComponent,
+    RolesDialogComponent,
+    SucursalesDialogComponent,
+    ReservasDialogComponent
   ],
 })
 export class ActivosProyectModule {}

@@ -5,7 +5,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/datepicker';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import * as Papa from 'papaparse'
@@ -256,5 +256,13 @@ const Papa = require('papaparse');
     this.showCSV = false;
     
   }
+ limpiarFiltros(input: HTMLInputElement): void {
+  input.value = '';
+  this.fechaSeleccionada = null;
+  this.dataSource.data = this.dataOriginal;
+  this.dataSource.filter = '' + Math.random(); // fuerza recalculo del filtro
+  this.calcularSumaMontos();
+}
+
 
 }

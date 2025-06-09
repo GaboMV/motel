@@ -1,0 +1,77 @@
+<mat-dialog-content>
+    <div class="popup-body">
+        <div class="inventual-popup-inner">
+            <div class="inventual-popup-header relative mb-5">
+                <div class="inventual-popup-header-title">
+                    <h4 class="text-[20px] text-white font-bold bg-primary p-5">Editar Producto</h4>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 gap-x-7 sm:gap-x-0 px-5 pb-5">
+                <div class="col-span-6 sm:col-span-12">
+                    <div class="inventual-select-field mb-6">
+                        <h5 class="text-[15px] text-heading font-semibold mb-3">Nombre</h5>
+                        <div class="inventual-input-field-style">
+                            <mat-form-field class="w-full" [floatLabel]="'always'">
+                                <mat-label class="hidden">Nombre</mat-label>
+                                <input type="text" matInput [placeholder]="'Ej. Cigarros LM'" class="form-control" [(ngModel)]="producto.nombre" name="nombre" id="nombre">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-6 sm:col-span-12">
+                    <div class="inventual-select-field mb-6">
+                        <h5 class="text-[15px] text-heading font-semibold mb-3">Categoría</h5>
+                        <div class="inventual-select-field-style">
+                            <mat-form-field>
+                                <mat-select [(ngModel)]="producto.categoria_id" [placeholder]="producto.categoria_id.toString() ? 'Seleccionar Categoría' : 'Categoría'">
+                                    <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
+                                        {{ categoria.nombre }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12 sm:col-span-12">
+                    <div class="inventual-select-field mb-6">
+                        <h5 class="text-[15px] text-heading font-semibold mb-3">Descripción</h5>
+                        <div class="inventual-input-field-style">
+                            <mat-form-field class="w-full" [floatLabel]="'always'">
+                                <mat-label class="hidden">Descripción</mat-label>
+                                <input type="text" matInput [placeholder]="'Ej. Es una caja de 12 unidades de cigarrillos LM'" class="form-control" [(ngModel)]="producto.descripcion" name="descripcion" id="descripcion">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-3 sm:col-span-12">
+                    <div class="inventual-select-field mb-6">
+                        <h5 class="text-[15px] text-heading font-semibold mb-3">Precio</h5>
+                        <div class="inventual-input-field-style">
+                            <mat-form-field class="w-full" [floatLabel]="'always'">
+                                <mat-label class="hidden">Precio</mat-label>
+                                Bs.<input type="number" matInput [placeholder]="'Ej. 3595.00'" class="form-control" [(ngModel)]="producto.precio" id="precio" name="precio">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-3 sm:col-span-12">
+                    <div class="inventual-select-field mb-6">
+                        <h5 class="text-[15px] text-heading font-semibold mb-3">Stock {{producto.stock}}</h5>
+                        <div class="inventual-input-field-style">
+                            <mat-form-field class="w-full" [floatLabel]="'always'">
+                                <mat-label class="hidden">Stock</mat-label>
+                                Unidades<input type="number" matInput [placeholder]="'0.00'" class="form-control" [(ngModel)]="producto.stock" id="stock" name="stock">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-12">
+                    <div class="inventual-material-btn pt-1.5 justify-end">
+                        <button type="submit" mat-raised-button color="danger" (click)="cerrarDialog()">Cancelar</button>
+                        <button type="submit" mat-raised-button color="primary">Editar Producto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

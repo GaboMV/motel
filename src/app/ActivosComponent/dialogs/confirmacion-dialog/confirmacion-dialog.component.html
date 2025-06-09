@@ -1,0 +1,26 @@
+<mat-dialog-content>
+    <div class="popup-body">
+        <div class="inventual-popup-inner">
+            <div class="p-5 grid grid-cols-12 gap-x-7 sm:gap-x-0">
+                <div class="col-span-12 sm:col-span-12">
+                    <div class="inventual-select-field mb-6 flex justify-center">
+                        <mat-icon [ngClass]="data.error ? 'text-green-500' : 'text-red-500'" class="text-[84px] p-8">
+                            {{ data.error ? 'check_circle' : 'cancel' }}
+                        </mat-icon>
+                    </div>
+                </div>
+                <div class="col-span-12 sm:col-span-12 flex justify-center">
+                    <h2 class="mb-2">
+                        {{ data.error ? 'El item '+data.tipo+' fue eliminado' : 'Error al eliminar '+data.tipo }}
+                    </h2>
+                </div>
+                <div class="col-span-12">
+                    <div class="inventual-material-btn pt-1.5 justify-center">
+                        <button type="submit" mat-raised-button color="primary"
+                            (click)="cerrarDialog()">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

@@ -2,52 +2,58 @@ import { INavbarData } from './helper';
 
 export const navbarData: INavbarData[] = [
   {
-    routeLink: 'usuarios',
+    routeLink: '/actividadusuarios',
     icon: 'fal fa-users',
-    label: 'Usuarios',
-    items: [
-      {
-        routeLink: '/usuarios/lista',
-        label: 'Lista de usuarios',
-      },
-      {
-        routeLink: '/usuarios/registro',
-        label: 'Registrar usuario',
-      },
-      //{
-      //  routeLink: '/usuarios/actividades',
-      //  label: 'Actividades de los usuarios X',
-      //},
-      {
-        routeLink: '/usuarios/roles',
-        label: 'Roles',
-      },
-    ],
+    label: 'Actividad',
+   
   },
   {
-    routeLink: 'activos',
-    icon: 'fal fa-ballot',
-    label: 'Activos',
-    items: [
-      {
-        routeLink: '/activos/lista',
-        label: 'Lista de activos',
-      },
-    ],
+    routeLink: '/dashboardmotel',
+    icon: 'fal fa-home',
+    label: 'Inicio',
+   
+  },
+   {
+    routeLink: '/cuartos',
+    icon: 'fal fa-cube',
+    label: 'Cuartos',
+   
+  },
+   {
+    routeLink: '/empleados',
+    icon: 'fal fa-user',
+    label: 'Empleados',
+   
+  },
+
+   {
+    routeLink: '/productos',
+    icon: 'fal fa-warehouse',
+    label: 'Productos',
   },
   {
-    routeLink: 'divisas',
-    icon: 'fal fa-coins',
-    label: 'Divisas',
-    items: [
-      {
-        routeLink: '/divisas/lista',
-        label: 'Lista de divisas',
-      },
-      {
-        routeLink: '/divisas/registro',
-        label: 'Registrar divisa',
-      }
-    ],
+    routeLink: '/reservas',
+    icon: 'fal fa-list',
+    label: 'Reservas',
+  },
+  {
+    routeLink: '/roles',
+    icon: 'fal fa-id-card',
+    label: 'Roles',
+  },
+  {
+    routeLink: '/sucursales',
+    icon: 'fal fa-city',
+    label: 'Sucursales',
+  },
+  {
+    routeLink: '/tipocuartos',
+    icon: 'fal fa-cubes',
+    label: 'Tipos de cuartos',
+  },
+  {
+    routeLink: '/transacciones',
+    icon: 'fal fa-dollar-sign',
+    label: 'Transacciones',
   },
 ];

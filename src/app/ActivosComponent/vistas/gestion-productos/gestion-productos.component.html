@@ -33,7 +33,7 @@
             <div class="inventual-common-material-table bg-white p-7 custom-shadow rounded-8 mb-5">
                 <div class="inventual-material-btn mb-7">
                     <button mat-raised-button color="primary"
-                        [routerLink]="['/expesne/addexpense']"><mat-icon>add_circle_outline</mat-icon>
+                        (click)="accsessDialogsService.crearProducto()"><mat-icon>add_circle_outline</mat-icon>
                         Agregar Producto</button>
                 </div>
                 <div class="inventual-table-header-search-area">
@@ -133,16 +133,16 @@
                                         class="common-action-menu-style" aria-label="Example icon-button with a menu">
                                         Action <mat-icon>arrow_drop_down</mat-icon>
                                     </button>
-                                    <mat-menu #beforeMenu="matMenu" xPosition="before" (click)="openEditModal(row)">
-                                        <button mat-menu-item>
+                                    <mat-menu #beforeMenu="matMenu" xPosition="before">
+                                        <button mat-menu-item (click)="accsessDialogsService.editarProducto(row)">
                                             <img src="../../../../../assets/img/icon/action-2.png" alt="icon not found">
                                             <span>Editar Producto</span>
                                         </button>
-                                        <button mat-menu-item (click)="openAddModal()">
+                                        <button mat-menu-item (click)="accsessDialogsService.crearProducto()">
                                             <img src="../../../../../assets/img/icon/action-4.png" alt="icon not found">
                                             <span>Agregar Producto</span>
                                         </button>
-                                        <button mat-menu-item (click)="openDeleteModal(row)">
+                                        <button mat-menu-item (click)="accsessDialogsService.eliminarElemento(row.id,'Producto')">
                                             <img src="../../../../../assets/img/icon/action-6.png" alt="icon not found">
                                             <span>Eliminar Producto</span>
                                         </button>
@@ -175,80 +175,4 @@
             -->
         </div>
     </div>
-</div>
-
-<!-- Modal de Edición de Producto -->
-<div class="custom-modal-backdrop" *ngIf="modalEditVisible">
-  <div class="custom-modal">
-    <h2>{{ editingProductId ? 'Editar Producto' : 'Agregar Producto' }}</h2>
-
-    <mat-form-field class="w-full">
-      <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="newProduct.nombre" required />
-    </mat-form-field>
-
-    <mat-form-field class="w-full">
-      <mat-label>Precio</mat-label>
-      <input matInput type="number" step="0.01" [(ngModel)]="newProduct.precio" required />
-    </mat-form-field>
-
-    <mat-form-field class="w-full">
-      <mat-label>Stock</mat-label>
-      <input matInput type="number" [(ngModel)]="newProduct.stock" required />
-    </mat-form-field>
-
-    <mat-form-field class="w-full">
-      <mat-label>Descripción</mat-label>
-      <textarea matInput [(ngModel)]="newProduct.descripcion"></textarea>
-    </mat-form-field>
-
-    <mat-form-field class="w-full">
-      <mat-label>Categoría</mat-label>
-      <mat-select [(ngModel)]="newProduct.categoria_id" required>
-        <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
-          {{ categoria.nombre }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <div class="w-full mb-4">
-      <mat-checkbox [(ngModel)]="newProduct.estado">Activo</mat-checkbox>
-    </div>
-
-    <div class="modal-actions">
-      <button mat-button (click)="closeEditModal()">Cancelar</button>
-      <button mat-raised-button color="primary" (click)="saveProduct()">
-        {{ editingProductId ? 'Actualizar' : 'Guardar' }}
-      </button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal de Confirmación de Eliminación -->
-<div class="custom-modal-backdrop" *ngIf="modalDeleteVisible">
-  <div class="custom-modal text-center">
-    <h2>¿Estás seguro de eliminar este producto?</h2>
-    <p class="text-gray-600 mb-4">Esta acción no se puede deshacer.</p>
-    <div class="modal-actions justify-center">
-      <button mat-stroked-button color="warn" (click)="deleteProduct()">Sí, eliminar</button>
-      <button mat-raised-button color="primary" (click)="closeDeleteModal()">Cancelar</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal de Resultado de Eliminación -->
-<div class="custom-modal-backdrop" *ngIf="modalDeleteResultVisible">
-  <div class="custom-modal text-center">
-    <div class="flex justify-center mb-4 text-[48px]">
-      <mat-icon [ngClass]="modalDeleteResultVisible ? 'text-green-500' : 'text-red-500'">
-        {{ modalDeleteResultVisible ? 'check_circle' : 'cancel' }}
-      </mat-icon>
-    </div>
-    <h2 class="mb-2">
-      {{ modalDeleteResultVisible ? 'Producto eliminado' : 'Error al eliminar el producto' }}
-    </h2>
-    <div class="modal-actions justify-center">
-      <button mat-raised-button color="primary" (click)="modalDeleteResultVisible = false">Aceptar</button>
-    </div>
-  </div>
 </div>

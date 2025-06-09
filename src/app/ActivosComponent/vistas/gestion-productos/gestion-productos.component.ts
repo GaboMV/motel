@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProductoInterface, productoData } from '../../servicios/data/productData';
 import { categoriaData, CategoriaInterface } from '../../servicios/data/categoryData';
+import { AccessDIalogsService } from '../../servicios/access/access-dialogs.service';
 
 @Component({
   selector: 'app-gestion-productos',
@@ -36,7 +37,7 @@ export class GestionProductosComponent {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, public accsessDialogsService: AccessDIalogsService) {
     this.dataSource = new MatTableDataSource(productoData);
     this.categorias = categoriaData;
   }

@@ -61,6 +61,10 @@ import { EmpleadosDialogComponent } from './dialogs/empleados-dialog/empleados-d
 import { RolesDialogComponent } from './dialogs/roles-dialog/roles-dialog.component';
 import { SucursalesDialogComponent } from './dialogs/sucursales-dialog/sucursales-dialog.component';
 import { ReservasDialogComponent } from './dialogs/reservas-dialog/reservas-dialog.component';
+import { CrearProductoDialogComponent } from './dialogs/crear-producto-dialog/crear-producto-dialog.component';
+import { EditarProductoDialogComponent } from './dialogs/editar-producto-dialog/editar-producto-dialog.component';
+import { EliminarElementoDialogComponent } from './dialogs/eliminar-elemento-dialog/eliminar-elemento-dialog.component';
+import { ConfirmacionDialogComponent } from './dialogs/confirmacion-dialog/confirmacion-dialog.component';
 
 @NgModule({
   imports: [
@@ -131,7 +135,11 @@ import { ReservasDialogComponent } from './dialogs/reservas-dialog/reservas-dial
     EmpleadosDialogComponent,
     RolesDialogComponent,
     SucursalesDialogComponent,
-    ReservasDialogComponent
+    ReservasDialogComponent,
+    CrearProductoDialogComponent,
+    EditarProductoDialogComponent,
+    EliminarElementoDialogComponent,
+    ConfirmacionDialogComponent
   ],
 })
 export class ActivosProyectModule {}

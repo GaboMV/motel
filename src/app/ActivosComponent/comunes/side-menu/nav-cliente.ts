@@ -1,6 +1,6 @@
 import { INavbarData } from './helper';
 
-export const navbarDataLector: INavbarData[] = [
+export const navbarClienteFinal: INavbarData[] = [
   {
     routeLink: 'usuarios',
     icon: 'fal fa-users',

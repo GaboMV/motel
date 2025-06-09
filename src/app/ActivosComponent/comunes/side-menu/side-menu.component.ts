@@ -16,8 +16,8 @@ import {
 import { Router } from '@angular/router';
 import { fadeInOut, INavbarData } from './helper';
 import { navbarData } from './nav-data';
-import { navbarDataEditor } from './nav-editor';
-import { navbarDataLector } from './nav-lector';
+import { navbarDataEmpleado } from './nav-empleado';
+import { navbarClienteFinal } from './nav-cliente';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -71,10 +71,10 @@ export class SideMenuComponent implements OnInit {
       this.navData = navbarData;
     }  
     if(localStorage.getItem('roleId') == '2'){
-      this.navData = navbarDataLector;
+      this.navData = navbarDataEmpleado;
     }  
     if(localStorage.getItem('roleId') == '3'){
-      this.navData = navbarDataEditor;
+      this.navData = navbarClienteFinal;
     }
   }
 

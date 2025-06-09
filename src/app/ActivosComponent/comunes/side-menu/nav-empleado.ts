@@ -1,6 +1,6 @@
 import { INavbarData } from './helper';
 
-export const navbarDataEditor: INavbarData[] = [
+export const navbarDataEmpleado: INavbarData[] = [
   {
     routeLink: 'activos',
     icon: 'fal fa-coins',
@@ -58,11 +58,6 @@ export const navbarDataEditor: INavbarData[] = [
         icon: 'fal fa-ballot',
         label: 'Identificadores X',
       },      
-      //{
-      //  routeLink: '/depreciacion',
-      //  icon: 'fal fa-ballot',
-      //  label: 'Depreciaciones',
-      //},
     ],
   },
   {
@@ -70,11 +65,6 @@ export const navbarDataEditor: INavbarData[] = [
     icon: 'fal fa-coins',
     label: 'Organización (Activos)',
     items: [
-      //{
-      //  routeLink: '/empresas',
-      //  icon: 'fal fa-ballot',
-      //  label: 'Empresas',
-      //},
       {
         routeLink: '/areas',
         icon: 'fal fa-ballot',

@@ -1,5 +1,5 @@
 export interface ProductCatInterfaceData {
-    id: any;
+    id: number;
     name: string;
     subCategory: string;
     products: string;

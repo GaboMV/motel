@@ -8,6 +8,9 @@ import { ConfirmacionDialogComponent } from '../../dialogs/confirmacion-dialog/c
 import { RoleInterface } from '../data/roleData';
 import {CrearRolDialogComponent} from "../../dialogs/crear-rol-dialog/crear-rol-dialog.component";
 import {EditarRolDialogComponent} from "../../dialogs/editar-rol-dialog/editar-rol-dialog.component";
+import {CrearEmpleadoDialogComponent} from "../../dialogs/crear-empleado-dialog/crear-empleado-dialog.component";
+import {EditarEmpleadoDialogComponent} from "../../dialogs/editar-empleado-dialog/editar-empleado-dialog.component";
+import {EmployeeInterface} from "../data/employeeData";
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +54,18 @@ export class AccessDIalogsService {
   }
 
   // Acceso a los dialogos de creación, edición de empleados
+  crearEmpleado(): void {
+    this.dialog.open(CrearEmpleadoDialogComponent, {
+      width: '700px'
+    });
+  }
+
+  editarEmpleado(empleado: EmployeeInterface): void {
+    this.dialog.open(EditarEmpleadoDialogComponent, {
+      width: '700px',
+      data: { empleado }
+    });
+  }
 
   // Acceso a los diálogos de creación, edición de roles
   crearRol(): void {

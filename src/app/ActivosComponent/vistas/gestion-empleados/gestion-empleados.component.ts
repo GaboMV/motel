@@ -6,12 +6,14 @@ import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { employeeData, EmployeeInterface } from '../../servicios/data/employeeData';
+import { AccessDIalogsService } from '../../servicios/access/access-dialogs.service';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-gestion-empleados',
   templateUrl: './gestion-empleados.component.html',
   styleUrls: ['./gestion-empleados.component.scss'],
-      encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
 })
 export class GestionEmpleadosComponent implements OnInit {
   displayedColumns: string[] = [
@@ -32,7 +34,6 @@ export class GestionEmpleadosComponent implements OnInit {
   menuSidebarActive = false;
 
   // Formulario y modales
-  employeeForm: FormGroup;
   showEmployeeModal = false;
   isEditMode = false;
   currentEmployeeId: number | null = null;
@@ -42,19 +43,11 @@ export class GestionEmpleadosComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(public dialog: MatDialog,private fb: FormBuilder) {
-    // Inicializar formulario
-    this.employeeForm = this.fb.group({
-      nombre: ['', Validators.required],
-      ci: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      telefono1: ['', Validators.required],
-      telefono2: [''],
-      estado: [true],
-      rol_id: ['', Validators.required],
-      sucursales_id: ['', Validators.required],
-      password: ['']
-    });
+  constructor(
+    public dialogsService: AccessDIalogsService,
+    private _snackBar: MatSnackBar
+  ) {
+    this.dataSource = new MatTableDataSource(employeeData);
   }
 
   ngOnInit(): void {}
@@ -100,66 +93,6 @@ export class GestionEmpleadosComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
 
-  // Métodos CRUD para empleados
-  addEmployee() {
-    this.isEditMode = false;
-    this.currentEmployeeId = null;
-    this.employeeForm.reset({
-      estado: true,
-      rol_id: '',
-      sucursales_id: ''
-    });
-    this.showEmployeeModal = true;
-  }
-
-  editEmployee(employee: EmployeeInterface) {
-    this.isEditMode = true;
-    this.currentEmployeeId = employee.id;
-    this.employeeForm.patchValue({
-      nombre: employee.nombre,
-      ci: employee.ci,
-      email: employee.email,
-      telefono1: employee.telefono1,
-      telefono2: employee.telefono2 || '',
-      estado: employee.estado,
-      rol_id: employee.rol_id,  // Asegúrate que esto tenga valor
-      sucursales_id: employee.sucursales_id,  // Asegúrate que esto tenga valor
-      password: 'dummyPassword'  // Campo requerido aunque no se muestre
-    });
-    this.showEmployeeModal = true;
-  }
-
-  saveEmployee() {
-    if (this.employeeForm.invalid) return;
-
-    const formData = this.employeeForm.value;
-
-    if (this.isEditMode && this.currentEmployeeId) {
-      // Editar empleado existente
-      const index = this.dataSource.data.findIndex(e => e.id === this.currentEmployeeId);
-      if (index !== -1) {
-        this.dataSource.data[index] = {
-          ...this.dataSource.data[index],
-          ...formData,
-          id: this.currentEmployeeId,
-          password: formData.password || this.dataSource.data[index].password
-        };
-      }
-    } else {
-      // Agregar nuevo empleado
-      const newId = Math.max(...this.dataSource.data.map(e => e.id), 0) + 1;
-      const newEmployee: EmployeeInterface = {
-        ...formData,
-        id: newId,
-        telefono2: formData.telefono2 || undefined
-      };
-      this.dataSource.data = [...this.dataSource.data, newEmployee];
-    }
-
-    this.dataSource._updateChangeSubscription(); // Actualizar la tabla
-    this.showEmployeeModal = false;
-  }
-
   viewDetails(employee: EmployeeInterface) {
     console.log('Ver detalles de:', employee);
     // Aquí puedes implementar la lógica para ver detalles si es necesario
@@ -171,6 +104,7 @@ export class GestionEmpleadosComponent implements OnInit {
     if (index !== -1) {
       this.dataSource.data[index] = { ...employee };
       this.dataSource._updateChangeSubscription();
+      this._snackBar.open(`Empleado ${employee.estado ? 'activado' : 'desactivado'}`, 'Cerrar', { duration: 2000 });
     }
   }
 
@@ -195,7 +129,7 @@ export class GestionEmpleadosComponent implements OnInit {
     this.employeeToDelete = null;
   }
 
-  // Métodos auxiliares
+  // Métodos auxiliares para nombres
   getRolName(rolId: number): string {
     const roles = {
       1: 'Administrador',

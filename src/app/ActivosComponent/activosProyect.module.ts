@@ -63,6 +63,8 @@ import { EliminarElementoDialogComponent } from './dialogs/eliminar-elemento-dia
 import { ConfirmacionDialogComponent } from './dialogs/confirmacion-dialog/confirmacion-dialog.component';
 import { CrearRolDialogComponent } from './dialogs/crear-rol-dialog/crear-rol-dialog.component';
 import { EditarRolDialogComponent } from './dialogs/editar-rol-dialog/editar-rol-dialog.component';
+import { CrearEmpleadoDialogComponent } from './dialogs/crear-empleado-dialog/crear-empleado-dialog.component';
+import { EditarEmpleadoDialogComponent } from './dialogs/editar-empleado-dialog/editar-empleado-dialog.component';
 
 @NgModule({
   imports: [
@@ -136,6 +138,8 @@ import { EditarRolDialogComponent } from './dialogs/editar-rol-dialog/editar-rol
     ConfirmacionDialogComponent,
     CrearRolDialogComponent,
     EditarRolDialogComponent,
+    CrearEmpleadoDialogComponent,
+    EditarEmpleadoDialogComponent,
   ],
 })
 export class ActivosProyectModule {}

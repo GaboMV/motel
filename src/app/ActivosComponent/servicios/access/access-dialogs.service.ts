@@ -11,6 +11,9 @@ import {EditarRolDialogComponent} from "../../dialogs/editar-rol-dialog/editar-r
 import {CrearEmpleadoDialogComponent} from "../../dialogs/crear-empleado-dialog/crear-empleado-dialog.component";
 import {EditarEmpleadoDialogComponent} from "../../dialogs/editar-empleado-dialog/editar-empleado-dialog.component";
 import {EmployeeInterface} from "../data/employeeData";
+import {CrearSucursalDialogComponent} from "../../dialogs/crear-sucursal-dialog/crear-sucursal-dialog.component";
+import {EditarSucursalDialogComponent} from "../../dialogs/editar-sucursal-dialog/editar-sucursal-dialog.component";
+import {Branch} from "../data/branchData";
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +81,20 @@ export class AccessDIalogsService {
     this.dialog.open(EditarRolDialogComponent, {
       width: '700px',
       data: { rol }
+    });
+  }
+
+  // Acceso a los diálogos de creación, edición de sucursales
+  crearSucursal(): void {
+    this.dialog.open(CrearSucursalDialogComponent, {
+      width: '700px'
+    });
+  }
+
+  editarSucursal(branch: Branch): void {
+    this.dialog.open(EditarSucursalDialogComponent, {
+      width: '700px',
+      data: { branch }
     });
   }
 }

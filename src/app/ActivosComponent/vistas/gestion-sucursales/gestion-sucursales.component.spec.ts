@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { GestionSucursalesComponent } from './gestion-sucursales.component';
+import { AccessDIalogsService } from '../../servicios/access/access-dialogs.service';
+import {GestionSucursalesComponent} from "./gestion-sucursales.component";
 
 describe('GestionSucursalesComponent', () => {
   let component: GestionSucursalesComponent;
@@ -8,7 +8,10 @@ describe('GestionSucursalesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [GestionSucursalesComponent]
+      declarations: [GestionSucursalesComponent],
+      providers: [
+        { provide: AccessDIalogsService, useValue: {} }
+      ]
     });
     fixture = TestBed.createComponent(GestionSucursalesComponent);
     component = fixture.componentInstance;

@@ -37,6 +37,9 @@ export class EliminarElementoDialogComponent {
       case 'Sucursal':
         this.eliminarSucursal(id);
         break;
+      case 'Reserva':
+        this.eliminarReserva(id);
+        break;
       default:
         break;
     }
@@ -70,5 +73,10 @@ export class EliminarElementoDialogComponent {
   eliminarSucursal(id: number) {
     this.cerrarDialog();
     this.dialogsService.confirmarAccion(true, 'Sucursal', 'eliminada correctamente', id);
+  }
+
+  eliminarReserva(id: number) {
+    this.cerrarDialog();
+    this.dialogsService.confirmarAccion(true, 'Reserva', 'eliminada correctamente', id);
   }
 }

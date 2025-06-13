@@ -1,0 +1,91 @@
+<mat-dialog-content>
+  <div class="popup-body">
+    <div class="inventual-popup-inner">
+      <div class="inventual-popup-header relative mb-5">
+        <div class="inventual-popup-header-title">
+          <h4 class="text-[20px] text-white font-bold bg-primary p-5">Editar Reserva</h4>
+        </div>
+      </div>
+      <div class="grid grid-cols-12 gap-x-7 sm:gap-x-0 px-5 pb-5">
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-select-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-3">Nombre del Cliente</h5>
+            <div class="inventual-input-field-style">
+              <mat-form-field class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden">Nombre</mat-label>
+                <input type="text" matInput [(ngModel)]="reserva.nombreCliente" placeholder="Ej. Juan Pérez">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-select-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-3">Nombre del Cuarto/Sala</h5>
+            <div class="inventual-select-field-style">
+              <mat-form-field>
+                <mat-select [(ngModel)]="reserva.nombreCuarto" placeholder="Seleccionar Cuarto" name="nombreCuarto">
+                  <mat-option *ngFor="let cuarto of cuartos" [value]="cuarto.nombre">
+                    {{ cuarto.nombre }} - {{ cuarto.tipo }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-select-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-3">Hora de Inicio</h5>
+            <div class="inventual-input-field-style">
+              <mat-form-field class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden">Hora Inicio</mat-label>
+                <input type="datetime-local" matInput [(ngModel)]="reserva.horaInicio">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-select-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-3">Hora de Fin</h5>
+            <div class="inventual-input-field-style">
+              <mat-form-field class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden">Hora Fin</mat-label>
+                <input type="datetime-local" matInput [(ngModel)]="reserva.horaFin">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 sm:col-span-12">
+          <div class="inventual-select-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-3">Estado</h5>
+            <div class="inventual-select-field-style">
+              <mat-form-field>
+                <mat-select [(ngModel)]="reserva.estado" placeholder="Seleccionar Estado">
+                  <mat-option *ngFor="let estado of estados" [value]="estado">
+                    {{ estado }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12 sm:col-span-12">
+          <div class="inventual-select-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-3">Detalles</h5>
+            <div class="inventual-input-field-style">
+              <mat-form-field class="w-full" [floatLabel]="'always'">
+                <mat-label class="hidden">Detalles</mat-label>
+                <textarea matInput [(ngModel)]="reserva.detalles" placeholder="Detalles adicionales de la reserva"></textarea>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-12">
+          <div class="inventual-material-btn pt-1.5 justify-end">
+            <button type="submit" mat-raised-button color="danger" (click)="cerrarDialog()">Cancelar</button>
+            <button type="submit" mat-raised-button color="primary" (click)="editarReserva()">Guardar Cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

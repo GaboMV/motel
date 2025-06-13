@@ -57,14 +57,12 @@ import { GestionSucursalesComponent } from "./vistas/gestion-sucursales/gestion-
 import { GestionTipoCuartosComponent } from "./vistas/gestion-tipo-cuartos/gestion-tipo-cuartos.component";
 import { GestionTransaccionesComponent } from "./vistas/gestion-transacciones/gestion-transacciones.component";
 import { GestionReservasComponent } from './vistas/gestion-reservas/gestion-reservas.component';
-import { EmpleadosDialogComponent } from './dialogs/empleados-dialog/empleados-dialog.component';
-import { RolesDialogComponent } from './dialogs/roles-dialog/roles-dialog.component';
-import { SucursalesDialogComponent } from './dialogs/sucursales-dialog/sucursales-dialog.component';
-import { ReservasDialogComponent } from './dialogs/reservas-dialog/reservas-dialog.component';
 import { CrearProductoDialogComponent } from './dialogs/crear-producto-dialog/crear-producto-dialog.component';
 import { EditarProductoDialogComponent } from './dialogs/editar-producto-dialog/editar-producto-dialog.component';
 import { EliminarElementoDialogComponent } from './dialogs/eliminar-elemento-dialog/eliminar-elemento-dialog.component';
 import { ConfirmacionDialogComponent } from './dialogs/confirmacion-dialog/confirmacion-dialog.component';
+import { CrearRolDialogComponent } from './dialogs/crear-rol-dialog/crear-rol-dialog.component';
+import { EditarRolDialogComponent } from './dialogs/editar-rol-dialog/editar-rol-dialog.component';
 
 @NgModule({
   imports: [
@@ -132,14 +130,12 @@ import { ConfirmacionDialogComponent } from './dialogs/confirmacion-dialog/confi
     GestionTipoCuartosComponent,
     GestionTransaccionesComponent,
     GestionReservasComponent,
-    EmpleadosDialogComponent,
-    RolesDialogComponent,
-    SucursalesDialogComponent,
-    ReservasDialogComponent,
     CrearProductoDialogComponent,
     EditarProductoDialogComponent,
     EliminarElementoDialogComponent,
-    ConfirmacionDialogComponent
+    ConfirmacionDialogComponent,
+    CrearRolDialogComponent,
+    EditarRolDialogComponent,
   ],
 })
 export class ActivosProyectModule {}

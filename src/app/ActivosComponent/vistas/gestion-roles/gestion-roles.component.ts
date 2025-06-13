@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { AccessDIalogsService } from '../../servicios/access/access-dialogs.service';
 
 @Component({
   selector: 'app-gestion-roles',
@@ -38,9 +39,11 @@ export class GestionRolesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    public dialogsService: AccessDIalogsService
+  ) {
     this.dataSource = new MatTableDataSource(roleData);
-
     this.roleForm = this.fb.group({
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],

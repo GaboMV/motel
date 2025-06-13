@@ -32,7 +32,7 @@
     <div class="inventual-content-area px-7">
       <div class="inventual-common-material-table bg-white p-7 custom-shadow rounded-8 mb-5">
         <div class="inventual-material-btn mb-7">
-          <button mat-raised-button color="primary" (click)="addRole()">
+          <button mat-raised-button color="primary" (click)="dialogsService.crearRol()">
             <mat-icon>add_circle_outline</mat-icon>
             Agregar Rol
           </button>
@@ -124,7 +124,7 @@
                     Acciones <mat-icon>arrow_drop_down</mat-icon>
                   </button>
                   <mat-menu #beforeMenu="matMenu" xPosition="before">
-                    <button mat-menu-item (click)="editRole(row)">
+                    <button mat-menu-item (click)="dialogsService.editarRol(row)">
                       <img src="../../../../../assets/img/icon/action-2.png" alt="icon not found">
                       <span>Editar rol</span>
                     </button>
@@ -132,7 +132,7 @@
                       <img src="../../../../../assets/img/icon/action-4.png" alt="icon not found">
                       <span>Duplicar rol</span>
                     </button>
-                    <button mat-menu-item (click)="deleteRole(row)">
+                    <button mat-menu-item (click)="dialogsService.eliminarElemento(row.id, 'Rol')">
                       <img src="../../../../../assets/img/icon/action-6.png" alt="icon not found">
                       <span>Eliminar rol</span>
                     </button>
@@ -163,79 +163,6 @@
       <!--
       <app-copyright></app-copyright>
       -->
-    </div>
-    <!-- Modal para agregar/editar rol -->
-    <div *ngIf="showRoleModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl">
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-4">{{isEditMode ? 'Editar Rol' : 'Agregar Rol'}}</h3>
-
-          <form [formGroup]="roleForm" (ngSubmit)="saveRole()">
-            <div class="grid grid-cols-1 gap-4 mb-4">
-              <mat-form-field class="w-full">
-                <mat-label>Nombre*</mat-label>
-                <input matInput formControlName="nombre" required>
-                <mat-error *ngIf="roleForm.get('nombre')?.hasError('required')">Este campo es requerido</mat-error>
-              </mat-form-field>
-
-              <mat-form-field class="w-full">
-                <mat-label>Descripción*</mat-label>
-                <textarea matInput formControlName="descripcion" required rows="3"></textarea>
-                <mat-error *ngIf="roleForm.get('descripcion')?.hasError('required')">Este campo es requerido</mat-error>
-              </mat-form-field>
-
-              <div class="mb-4">
-                <h4 class="text-sm font-medium mb-2">Permisos</h4>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                  <!-- Ejemplo de permisos - puedes personalizar según tus necesidades -->
-                  <mat-checkbox formControlName="permisos" value="crear">Crear</mat-checkbox>
-                  <mat-checkbox formControlName="permisos" value="leer">Leer</mat-checkbox>
-                  <mat-checkbox formControlName="permisos" value="actualizar">Actualizar</mat-checkbox>
-                  <mat-checkbox formControlName="permisos" value="eliminar">Eliminar</mat-checkbox>
-                  <mat-checkbox formControlName="permisos" value="gestionar_usuarios">Gestionar usuarios</mat-checkbox>
-                  <mat-checkbox formControlName="permisos" value="gestionar_roles">Gestionar roles</mat-checkbox>
-                </div>
-              </div>
-
-              <mat-form-field class="w-full">
-                <mat-label>Estado</mat-label>
-                <mat-select formControlName="estado">
-                  <mat-option [value]="true">Activo</mat-option>
-                  <mat-option [value]="false">Inactivo</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-
-            <div class="flex justify-end space-x-3 mt-6">
-              <button type="button" mat-stroked-button (click)="showRoleModal = false">
-                Cancelar
-              </button>
-              <button type="submit" mat-raised-button color="primary" [disabled]="roleForm.invalid">
-                {{isEditMode ? 'Actualizar' : 'Guardar'}}
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal para confirmar eliminación -->
-    <div *ngIf="showDeleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div class="bg-white rounded-lg shadow-xl w-full max-w-md">
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-4">Confirmar Eliminación</h3>
-          <p class="mb-6">¿Estás seguro que deseas eliminar el rol "{{roleToDelete?.nombre}}"?</p>
-
-          <div class="flex justify-end space-x-3">
-            <button mat-stroked-button (click)="cancelDelete()">
-              Cancelar
-            </button>
-            <button mat-raised-button color="warn" (click)="confirmDelete()">
-              Eliminar
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>

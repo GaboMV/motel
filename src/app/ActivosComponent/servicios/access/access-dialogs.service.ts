@@ -5,13 +5,16 @@ import { EditarProductoDialogComponent } from '../../dialogs/editar-producto-dia
 import { ProductoInterface } from '../data/productData';
 import { EliminarElementoDialogComponent } from '../../dialogs/eliminar-elemento-dialog/eliminar-elemento-dialog.component';
 import { ConfirmacionDialogComponent } from '../../dialogs/confirmacion-dialog/confirmacion-dialog.component';
+import { RoleInterface } from '../data/roleData';
+import {CrearRolDialogComponent} from "../../dialogs/crear-rol-dialog/crear-rol-dialog.component";
+import {EditarRolDialogComponent} from "../../dialogs/editar-rol-dialog/editar-rol-dialog.component";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccessDIalogsService {
 
-  constructor(public dialog: MatDialog) { }  
+  constructor(public dialog: MatDialog) { }
 
   //Funciones para eliminar
   eliminarElemento(idelemento: number, tipo: string, idAux?: number): void {
@@ -36,7 +39,7 @@ export class AccessDIalogsService {
     });
   }
 
-  // Acseso a los diálogos de creación, edición de productos 
+  // Acseso a los diálogos de creación, edición de productos
   crearProducto(): void {
     this.dialog.open(CrearProductoDialogComponent, {
     });
@@ -48,4 +51,18 @@ export class AccessDIalogsService {
   }
 
   // Acceso a los dialogos de creación, edición de empleados
+
+  // Acceso a los diálogos de creación, edición de roles
+  crearRol(): void {
+    this.dialog.open(CrearRolDialogComponent, {
+      width: '700px'
+    });
+  }
+
+  editarRol(rol: RoleInterface): void {
+    this.dialog.open(EditarRolDialogComponent, {
+      width: '700px',
+      data: { rol }
+    });
+  }
 }

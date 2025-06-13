@@ -31,6 +31,9 @@ export class EliminarElementoDialogComponent {
       case 'Empleado':
         this.eliminarEmpleado(id);
         break;
+      case 'Rol':
+        this.eliminarRol(id);
+        break;
       default:
         break;
     }
@@ -54,5 +57,10 @@ export class EliminarElementoDialogComponent {
   eliminarEmpleado(id: number) {
     this.cerrarDialog();
     this.dialogsService.confirmarAccion(true, 'Empleado', 'eliminado correctamente', id);
+  }
+
+  eliminarRol(id: number) {
+    this.cerrarDialog();
+    this.dialogsService.confirmarAccion(true, 'Rol', 'eliminado correctamente', id);
   }
 }

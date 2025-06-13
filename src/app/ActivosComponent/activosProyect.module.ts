@@ -67,6 +67,8 @@ import { CrearEmpleadoDialogComponent } from './dialogs/crear-empleado-dialog/cr
 import { EditarEmpleadoDialogComponent } from './dialogs/editar-empleado-dialog/editar-empleado-dialog.component';
 import { CrearSucursalDialogComponent } from './dialogs/crear-sucursal-dialog/crear-sucursal-dialog.component';
 import { EditarSucursalDialogComponent } from './dialogs/editar-sucursal-dialog/editar-sucursal-dialog.component';
+import { CrearReservaDialogComponent } from './dialogs/crear-reserva-dialog/crear-reserva-dialog.component';
+import { EditarReservaDialogComponent } from './dialogs/editar-reserva-dialog/editar-reserva-dialog.component';
 
 @NgModule({
   imports: [
@@ -144,6 +146,8 @@ import { EditarSucursalDialogComponent } from './dialogs/editar-sucursal-dialog/
     EditarEmpleadoDialogComponent,
     CrearSucursalDialogComponent,
     EditarSucursalDialogComponent,
+    CrearReservaDialogComponent,
+    EditarReservaDialogComponent,
   ],
 })
 export class ActivosProyectModule {}

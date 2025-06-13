@@ -3,8 +3,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReservaInterface, reservaData } from '../../servicios/data/reservaData';
+import { AccessDIalogsService } from '../../servicios/access/access-dialogs.service';
 
 @Component({
   selector: 'app-gestion-reservas',
@@ -30,29 +30,10 @@ export class GestionReservasComponent implements OnInit {
   selection = new SelectionModel<ReservaInterface>(true, []);
   menuSidebarActive = false;
 
-  // Formulario y modales
-  reservaForm: FormGroup;
-  showReservaModal = false;
-  isEditMode = false;
-  currentReservaId: number | null = null;
-  showDeleteModal = false;
-  reservaToDelete: ReservaInterface | null = null;
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private fb: FormBuilder) {
-    this.reservaForm = this.fb.group({
-      nombreCliente: ['', Validators.required],
-      carnetCliente: [''],
-      nombreCuarto: ['', Validators.required],
-      horaInicio: ['', Validators.required],
-      horaFin: ['', Validators.required],
-      detalles: [''],
-      estado: ['pendiente', Validators.required],
-      pagado: [false]
-    });
-  }
+  constructor(public dialogsService: AccessDIalogsService) {}
 
   ngOnInit(): void {}
 
@@ -95,66 +76,34 @@ export class GestionReservasComponent implements OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
 
-  addReserva() {
-    this.isEditMode = false;
-    this.currentReservaId = null;
-    this.reservaForm.reset({
-      estado: 'pendiente',
-      pagado: false
-    });
-    this.showReservaModal = true;
-  }
-
-  editReserva(reserva: ReservaInterface) {
-    this.isEditMode = true;
-    this.currentReservaId = reserva.id;
-    this.reservaForm.patchValue({
-      nombreCliente: reserva.nombreCliente,
-      carnetCliente: reserva.carnetCliente || '',
-      nombreCuarto: reserva.nombreCuarto,
-      horaInicio: reserva.horaInicio,
-      horaFin: reserva.horaFin,
-      detalles: reserva.detalles || '',
-      estado: reserva.estado,
-      pagado: reserva.pagado
-    });
-    this.showReservaModal = true;
-  }
-
-  saveReserva() {
-    if (this.reservaForm.invalid) return;
-
-    const formData = this.reservaForm.value;
-
-    if (this.isEditMode && this.currentReservaId) {
-      const index = this.dataSource.data.findIndex(r => r.id === this.currentReservaId);
-      if (index !== -1) {
-        this.dataSource.data[index] = {
-          ...this.dataSource.data[index],
-          ...formData,
-          id: this.currentReservaId,
-          actualizado_en: new Date()
-        };
-      }
-    } else {
-      const newId = Math.max(...this.dataSource.data.map(r => r.id), 0) + 1;
-      const newReserva: ReservaInterface = {
-        ...formData,
-        id: newId,
-        creado_en: new Date(),
-        actualizado_en: new Date(),
-        carnetCliente: formData.carnetCliente || undefined
-      };
-      this.dataSource.data = [...this.dataSource.data, newReserva];
-    }
-
-    this.dataSource._updateChangeSubscription();
-    this.showReservaModal = false;
-  }
-
+  // Métodos para manejar acciones
   confirmReserva(reserva: ReservaInterface) {
     reserva.estado = 'confirmada';
     this.updateReserva(reserva);
+  }
+
+  updateReserva(reserva: ReservaInterface) {
+    const index = this.dataSource.data.findIndex(r => r.id === reserva.id);
+    if (index !== -1) {
+      this.dataSource.data[index] = {
+        ...reserva,
+        actualizado_en: new Date()
+      };
+      this.dataSource._updateChangeSubscription();
+    }
+  }
+
+  // Para el menú de acciones
+  editReserva(reserva: ReservaInterface) {
+    this.dialogsService.editarReserva(reserva);
+  }
+
+  deleteReserva(reserva: ReservaInterface) {
+    this.dialogsService.eliminarElemento(reserva.id, 'Reserva');
+  }
+
+  addReserva() {
+    this.dialogsService.crearReserva();
   }
 
   startReserva(reserva: ReservaInterface) {
@@ -175,38 +124,6 @@ export class GestionReservasComponent implements OnInit {
   togglePayment(reserva: ReservaInterface) {
     reserva.pagado = !reserva.pagado;
     this.updateReserva(reserva);
-  }
-
-  updateReserva(reserva: ReservaInterface) {
-    const index = this.dataSource.data.findIndex(r => r.id === reserva.id);
-    if (index !== -1) {
-      this.dataSource.data[index] = {
-        ...reserva,
-        actualizado_en: new Date()
-      };
-      this.dataSource._updateChangeSubscription();
-    }
-  }
-
-  deleteReserva(reserva: ReservaInterface) {
-    this.reservaToDelete = reserva;
-    this.showDeleteModal = true;
-  }
-
-  confirmDelete() {
-    if (this.reservaToDelete) {
-      this.dataSource.data = this.dataSource.data.filter(
-        r => r.id !== this.reservaToDelete!.id
-      );
-      this.dataSource._updateChangeSubscription();
-      this.showDeleteModal = false;
-      this.reservaToDelete = null;
-    }
-  }
-
-  cancelDelete() {
-    this.showDeleteModal = false;
-    this.reservaToDelete = null;
   }
 
   getEstadoClass(estado: string): string {

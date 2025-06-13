@@ -14,6 +14,9 @@ import {EmployeeInterface} from "../data/employeeData";
 import {CrearSucursalDialogComponent} from "../../dialogs/crear-sucursal-dialog/crear-sucursal-dialog.component";
 import {EditarSucursalDialogComponent} from "../../dialogs/editar-sucursal-dialog/editar-sucursal-dialog.component";
 import {Branch} from "../data/branchData";
+import {CrearReservaDialogComponent} from "../../dialogs/crear-reserva-dialog/crear-reserva-dialog.component";
+import {EditarReservaDialogComponent} from "../../dialogs/editar-reserva-dialog/editar-reserva-dialog.component";
+import {ReservaInterface} from "../data/reservaData";
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +98,20 @@ export class AccessDIalogsService {
     this.dialog.open(EditarSucursalDialogComponent, {
       width: '700px',
       data: { branch }
+    });
+  }
+
+  // Acceso a los diálogos de creación, edición de reservas
+  crearReserva(): void {
+    this.dialog.open(CrearReservaDialogComponent, {
+      width: '700px'
+    });
+  }
+
+  editarReserva(reserva: ReservaInterface): void {
+    this.dialog.open(EditarReservaDialogComponent, {
+      width: '700px',
+      data: reserva
     });
   }
 }

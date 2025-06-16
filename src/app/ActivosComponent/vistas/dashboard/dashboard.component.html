@@ -48,32 +48,32 @@
                                 </button>
                                 <mat-menu #beforeMenu="matMenu" xPosition="before">
                                     <button *ngIf="cuarto.ocupado === 'Libre'" mat-menu-item
-                                        (click)="openEditReservaModal()">
+                                        (click)="accessDialogsService.crearReserva()">
                                         <img src="../../../../../assets/img/icon/action-2.png" alt="icon not found">
                                         <span>Reservar</span>
                                     </button>
                                     <button *ngIf="cuarto.ocupado === 'Reservado' || cuarto.ocupado === 'Libre'"
-                                        mat-menu-item (click)="confirmOcupar()">
+                                        mat-menu-item (click)="accessDialogsService.ocuparCuarto(cuarto)">
                                         <img src="../../../../../assets/img/icon/action-5.png" alt="icon not found">
                                         <span>Ocupar</span>
                                     </button>
                                     <button *ngIf="cuarto.ocupado === 'Libre'" mat-menu-item
-                                        (click)="confirmLimpieza()">
+                                        (click)="accessDialogsService.enviarLimpieza(cuarto)">
                                         <img src="../../../../../assets/img/icon/action-1.png" alt="icon not found">
                                         <span>Limpieza</span>
                                     </button>
                                     <button *ngIf="cuarto.ocupado === 'Ocupado'" mat-menu-item
-                                        (click)="confirmCheckout()">
+                                        (click)="accessDialogsService.checkoutCuarto(cuarto)">
                                         <img src="../../../../../assets/img/icon/action-5.png" alt="icon not found">
                                         <span>Check-out</span>
                                     </button>
                                     <button *ngIf="cuarto.ocupado === 'Limpieza' || cuarto.ocupado === 'Mantenimiento'"
-                                        mat-menu-item (click)="confirmHabilitar()">
+                                        mat-menu-item (click)="accessDialogsService.habilitarCuarto(cuarto)">
                                         <img src="../../../../../assets/img/icon/action-4.png" alt="icon not found">
                                         <span>Habilitar cuarto</span>
                                     </button>
                                     <button *ngIf="cuarto.ocupado === 'Libre' || cuarto.ocupado === 'Limpieza'"
-                                        mat-menu-item (click)="confirmLimpieza()">
+                                        mat-menu-item (click)="accessDialogsService.enviarMantenimiento(cuarto)">
                                         <img src="../../../../../assets/img/icon/action-1.png" alt="icon not found">
                                         <span>Mantenimiento</span>
                                     </button>
@@ -119,11 +119,11 @@
                                         - 10:30-11:30, María García (7654321SC)
                                     </div>
                                     <div class="flex space-x-1">
-                                        <button mat-mini-fab color="primary" class="!w-8 !h-8" aria-label="Agregar" (click)="openEditReservaModal(cuarto)">
+                                        <button mat-mini-fab color="primary" class="!w-8 !h-8" aria-label="Agregar" (click)="accessDialogsService.editarReserva(reserva)">
                                             <mat-icon
                                                 class="!text-base !flex !items-center !justify-center">edit</mat-icon>
                                         </button>
-                                        <button mat-mini-fab color="warn" class="!w-8 !h-8" aria-label="Eliminar" (click)="confirmCancelReserva()">
+                                        <button mat-mini-fab color="warn" class="!w-8 !h-8" aria-label="Eliminar" (click)="accessDialogsService.eliminarElemento(cuarto.id, 'Reserva')">
                                             <mat-icon
                                                 class="!text-base !flex !items-center !justify-center">delete</mat-icon>
                                         </button>
@@ -136,11 +136,11 @@
                                         - 16:15-18:15, Juan Pérez (1234567LP)
                                     </div>
                                     <div class="flex space-x-1">
-                                        <button mat-mini-fab color="primary" class="!w-8 !h-8" aria-label="Agregar" (click)="openEditReservaModal(cuarto)">
+                                        <button mat-mini-fab color="primary" class="!w-8 !h-8" aria-label="Agregar" (click)="accessDialogsService.editarReserva(reserva)">
                                             <mat-icon
                                                 class="!text-base !flex !items-center !justify-center">edit</mat-icon>
                                         </button>
-                                        <button mat-mini-fab color="warn" class="!w-8 !h-8" aria-label="Eliminar" (click)="confirmCancelReserva()">
+                                        <button mat-mini-fab color="warn" class="!w-8 !h-8" aria-label="Eliminar" (click)="accessDialogsService.eliminarElemento(cuarto.id, 'Reserva')">
                                             <mat-icon
                                                 class="!text-base !flex !items-center !justify-center">delete</mat-icon>
                                         </button>
@@ -153,11 +153,11 @@
                                         - 09:00-11:00, Ana Rodríguez (3456789OR)
                                     </div>
                                     <div class="flex space-x-1">
-                                        <button mat-mini-fab color="primary" class="!w-8 !h-8" aria-label="Agregar" (click)="openEditReservaModal(cuarto)">
+                                        <button mat-mini-fab color="primary" class="!w-8 !h-8" aria-label="Agregar" (click)="accessDialogsService.editarReserva(reserva)">
                                             <mat-icon
                                                 class="!text-base !flex !items-center !justify-center">edit</mat-icon>
                                         </button>
-                                        <button mat-mini-fab color="warn" class="!w-8 !h-8" aria-label="Eliminar" (click)="confirmCancelReserva()">
+                                        <button mat-mini-fab color="warn" class="!w-8 !h-8" aria-label="Eliminar" (click)="accessDialogsService.eliminarElemento(cuarto.id, 'Reserva')">
                                             <mat-icon
                                                 class="!text-base !flex !items-center !justify-center">delete</mat-icon>
                                         </button>
@@ -177,7 +177,7 @@
                             </p>
                         </div>
                         <button *ngIf="cuarto.ocupado === 'Ocupado'" mat-raised-button color="primary"
-                            (click)="openAddProductoModal()"><mat-icon class="mt-2">add_circle_outline</mat-icon>
+                            (click)="accessDialogsService.agregarProductoTransaccion()"><mat-icon class="mt-2">add_circle_outline</mat-icon>
                             Agregar Producto</button>
                     </div>
                 </article>

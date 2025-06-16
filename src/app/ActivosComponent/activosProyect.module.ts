@@ -69,6 +69,12 @@ import { CrearSucursalDialogComponent } from './dialogs/crear-sucursal-dialog/cr
 import { EditarSucursalDialogComponent } from './dialogs/editar-sucursal-dialog/editar-sucursal-dialog.component';
 import { CrearReservaDialogComponent } from './dialogs/crear-reserva-dialog/crear-reserva-dialog.component';
 import { EditarReservaDialogComponent } from './dialogs/editar-reserva-dialog/editar-reserva-dialog.component';
+import { CrearOcuparcuartoDialogComponent } from './dialogs/crear-ocuparcuarto-dialog/crear-ocuparcuarto-dialog.component';
+import { CrearLimpiezaDialogComponent } from './dialogs/crear-limpieza-dialog/crear-limpieza-dialog.component';
+import { CrearMantenimientoDialogComponent } from './dialogs/crear-mantenimiento-dialog/crear-mantenimiento-dialog.component';
+import { CrearCheckoutDialogComponent } from './dialogs/crear-checkout-dialog/crear-checkout-dialog.component';
+import { CrearHabilitarDialogComponent } from './dialogs/crear-habilitar-dialog/crear-habilitar-dialog.component';
+import { AgregarProductoCuartoDialogComponent } from './dialogs/agregar-producto-cuarto-dialog/agregar-producto-cuarto-dialog.component';
 
 @NgModule({
   imports: [
@@ -148,6 +154,12 @@ import { EditarReservaDialogComponent } from './dialogs/editar-reserva-dialog/ed
     EditarSucursalDialogComponent,
     CrearReservaDialogComponent,
     EditarReservaDialogComponent,
+    CrearOcuparcuartoDialogComponent,
+    CrearLimpiezaDialogComponent,
+    CrearMantenimientoDialogComponent,
+    CrearCheckoutDialogComponent,
+    CrearHabilitarDialogComponent,
+    AgregarProductoCuartoDialogComponent,
   ],
 })
 export class ActivosProyectModule {}

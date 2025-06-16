@@ -10,6 +10,7 @@ import { map, Observable, startWith } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { FormControl } from '@angular/forms';
 import { ReservaInterface } from '../../servicios/data/reservaData';
+import { AccessDIalogsService } from '../../servicios/access/access-dialogs.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -40,7 +41,7 @@ export class DashboardMotelComponent {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, public accessDialogsService: AccessDIalogsService) {
     this.dataSource = new MatTableDataSource(cuartoData);
     this.productos = productoData
   }

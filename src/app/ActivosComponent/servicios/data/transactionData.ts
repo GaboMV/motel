@@ -1,5 +1,5 @@
 // src/app/servicios/data/roleData.ts
-export interface RoleInterface {
+export interface TransaccionInterface {
   id: number;
   fecha: Date;
   horaEntrada: Date;
@@ -13,7 +13,7 @@ export interface RoleInterface {
   
 }
 
-export const roleData: RoleInterface[] = [
+export const transaccionData: TransaccionInterface[] = [
    {
     id: 1,
     fecha: new Date('2025-06-01'),

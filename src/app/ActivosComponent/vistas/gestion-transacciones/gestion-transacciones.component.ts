@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { roleData, RoleInterface } from '../../servicios/data/transactionData';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
@@ -9,6 +8,7 @@ import { MatDatepickerInput, MatDatepickerInputEvent } from '@angular/material/d
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import * as Papa from 'papaparse'
+import { transaccionData, TransaccionInterface } from '../../servicios/data/transactionData';
 
 //import * as Papa from 'papaparse';
 
@@ -33,8 +33,8 @@ export class GestionTransaccionesComponent implements OnInit {
     'estado',
     'accion',
   ];
-  dataSource: MatTableDataSource<RoleInterface>;
-  selection = new SelectionModel<RoleInterface>(true, []);
+  dataSource: MatTableDataSource<TransaccionInterface>;
+  selection = new SelectionModel<TransaccionInterface>(true, []);
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -43,7 +43,7 @@ export class GestionTransaccionesComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {
     // Asignamos los datos de roles a la fuente de datos
-    this.dataSource = new MatTableDataSource(roleData);
+    this.dataSource = new MatTableDataSource(transaccionData);
   }
 
   ngAfterViewInit() {
@@ -75,7 +75,7 @@ export class GestionTransaccionesComponent implements OnInit {
     this.selection.select(...this.dataSource.data);
   }
 
-  checkboxLabel(row?: RoleInterface): string {
+  checkboxLabel(row?: TransaccionInterface): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
@@ -94,7 +94,7 @@ export class GestionTransaccionesComponent implements OnInit {
     console.log('Agregar nuevo rol');
   }
 modalEditVisible = false;
-  editType(role: RoleInterface) {
+  editType(role: TransaccionInterface) {
     this.modalEditVisible = true;
     console.log('Editar rol:', role);
   }
@@ -103,7 +103,7 @@ modalEditVisible = false;
     
   }
 
-  duplicateRole(role: RoleInterface) {
+  duplicateRole(role: TransaccionInterface) {
     // Lógica para duplicar un rol
     console.log('Duplicar rol:', role);
   }
@@ -112,7 +112,7 @@ modalEditVisible = false;
 showDeleteConfirm=false;
 deleteResult: boolean | null = null;
 tipoSeleccionado: any = null;
-  deleteType(role: RoleInterface) {
+  deleteType(role: TransaccionInterface) {
 this.showDeleteConfirm=true;
     console.log('Eliminar rol:', role);
   }
@@ -136,7 +136,7 @@ this.showDeleteConfirm=true;
   }, 500);
 }
 
-  toggleRoleStatus(role: RoleInterface) {
+  toggleRoleStatus(role: TransaccionInterface) {
     // Lógica para cambiar el estado de un rol
     role.estado = !role.estado;
     console.log('Cambiar estado del rol:', role);

@@ -1,0 +1,27 @@
+<mat-dialog-content>
+    <div class="popup-body">
+        <div class="inventual-popup-inner p-5">
+            <div class="inventual-popup-header p-5 relative">
+                <div class="inventual-popup-header-title">
+                    <h4 class="text-[20px] text-heading font-bold">Mensaje de Confirmación</h4>
+                </div>
+            </div>
+            <div class="p-5 grid grid-cols-12 gap-x-7 sm:gap-x-0">
+                <div class="col-span-12 sm:col-span-12">
+                    <div class="inventual-select-field mb-6">
+                        <h2>¿Enviar este cuarto a mantenimiento?</h2>
+                        <h5 class="text-[15px] text-heading font-semibold mb-3">El cuarto no estará disponible hasta que se complete el mantenimiento.</h5>
+                    </div>
+                </div>
+                <div class="col-span-12">
+                    <div class="inventual-material-btn pt-1.5 justify-end">
+                        <button type="submit" mat-raised-button color="primary">
+                            Si, enviar.</button>
+                        <button type="submit" mat-raised-button color="primary" (click)="cerrarDialog()">
+                            Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

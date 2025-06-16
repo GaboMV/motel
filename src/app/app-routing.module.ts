@@ -48,7 +48,7 @@ import { RolepermissionComponent } from './inventual/settings/rolepermission/rol
 import { PurchaselistinvoiveComponent } from './inventual/trading/invoice/purchaselistinvoive/purchaselistinvoive.component';
 import { ExpenseinvoiceComponent } from './inventual/trading/invoice/expenseinvoice/expenseinvoice.component';
 import { ExpenselistinvoiceComponent } from './inventual/trading/invoice/expenselistinvoice/expenselistinvoice.component';
-import { LoginComponent } from './inventual/common/login/login.component';
+import { LoginComponent } from './ActivosComponent/comunes/login/login.component';
 import { RegisterComponent } from './inventual/common/register/register.component';
 import { ForgotpasswordComponent } from './inventual/common/forgotpassword/forgotpassword.component';
 import { ProfileComponent } from './inventual/common/profile/profile.component';
@@ -61,7 +61,6 @@ import { CustomerreportComponent } from './inventual/report/customerreport/custo
 import { WarehousereportComponent } from './inventual/report/warehousereport/warehousereport.component';
 import { ElementsComponent } from './inventual/elements/elements.component';
 import { NotFoundComponent } from './inventual/not-found/not-found.component';
-import { ActivosLoginComponent } from './ActivosComponent/activos-login/activos-login.component';
 import { RecuperarPasswordComponent } from './ActivosComponent/recuperar-password/recuperar-password.component';
 import { ActividadUsuariosComponent } from './ActivosComponent/vistas/actividad-usuarios/actividad-usuarios.component';
 import { GestionCuartosComponent } from './ActivosComponent/vistas/gestion-cuartos/gestion-cuartos.component';
@@ -79,7 +78,7 @@ const routes: Routes = [
   //Rutas comunes
   {
     path: '',
-    component: ActivosLoginComponent,
+    component: LoginComponent,
     pathMatch: 'full'
   },
   {

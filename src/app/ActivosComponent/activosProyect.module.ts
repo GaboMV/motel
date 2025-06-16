@@ -28,7 +28,6 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { NgApexchartsModule } from "ng-apexcharts";
-import { ActivosLoginComponent } from "./activos-login/activos-login.component";
 import { RecuperarPasswordComponent } from './recuperar-password/recuperar-password.component';
 import { SideMenuComponent } from './comunes/side-menu/side-menu.component';
 import { CabeceraComponent } from './comunes/cabecera/cabecera.component';
@@ -75,6 +74,7 @@ import { CrearMantenimientoDialogComponent } from './dialogs/crear-mantenimiento
 import { CrearCheckoutDialogComponent } from './dialogs/crear-checkout-dialog/crear-checkout-dialog.component';
 import { CrearHabilitarDialogComponent } from './dialogs/crear-habilitar-dialog/crear-habilitar-dialog.component';
 import { AgregarProductoCuartoDialogComponent } from './dialogs/agregar-producto-cuarto-dialog/agregar-producto-cuarto-dialog.component';
+import { LoginComponent } from './comunes/login/login.component';
 
 @NgModule({
   imports: [
@@ -119,7 +119,6 @@ import { AgregarProductoCuartoDialogComponent } from './dialogs/agregar-producto
     QRCodeModule
   ],
   declarations: [
-    ActivosLoginComponent,
     RecuperarPasswordComponent,
     SideMenuComponent,
     CabeceraComponent,
@@ -160,6 +159,7 @@ import { AgregarProductoCuartoDialogComponent } from './dialogs/agregar-producto
     CrearCheckoutDialogComponent,
     CrearHabilitarDialogComponent,
     AgregarProductoCuartoDialogComponent,
+    LoginComponent,
   ],
 })
 export class ActivosProyectModule {}

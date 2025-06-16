@@ -5,7 +5,7 @@ export const navbarData: INavbarData[] = [
     //Admin
     routeLink: '/actividadusuarios',
     icon: 'fal fa-users',
-    label: 'Actividad',
+    label: 'Actividad de usuarios',
 
   },
   {

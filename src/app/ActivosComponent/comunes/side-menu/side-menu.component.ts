@@ -67,13 +67,13 @@ export class SideMenuComponent implements OnInit {
   constructor(public router: Router) {}
 
   asignarData(){    
-    if(localStorage.getItem('roleId') == '1'){
+    if(localStorage.getItem('rolId') == '1'){
       this.navData = navbarData;
     }  
-    if(localStorage.getItem('roleId') == '2'){
+    if(localStorage.getItem('rolId') == '2'){
       this.navData = navbarDataEmpleado;
     }  
-    if(localStorage.getItem('roleId') == '3'){
+    if(localStorage.getItem('rolId') == '3'){
       this.navData = navbarClienteFinal;
     }
   }

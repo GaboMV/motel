@@ -1,13 +1,13 @@
 <div class="inventual-login-area flex justify-center items-center w-full min-h-screen h-full">
     <div class="inventual-login-wrapper">
         <div class="inventual-login-logo text-center mb-12">
-            <img src="../../../../assets/img/logo/login-logo.png" alt="logo not found">
+            <img src="https://motelcolonial.com.mx/wp-content/uploads/2024/11/WEB_MOTEL-COLONIAL-LOGO_C.png" alt="logo not found" class="w-1/2 mx-auto">
         </div>
         <div class="inventual-select-field mb-5">
             <div class="inventual-input-field-style">
               <mat-form-field class="w-full" [floatLabel]="'always'">
                 <mat-label class="hidden">Joseph Tylor</mat-label>
-                <input matInput [placeholder]="'Username'" value="Admin">
+                <input matInput [placeholder]="'Email'" value="Admin" [(ngModel)]="usuario.email">
               </mat-form-field>
               <caption><mat-icon>person_outline</mat-icon></caption>
             </div>
@@ -15,8 +15,8 @@
         <div class="inventual-select-field mb-5">
             <div class="inventual-input-field-style inventual-input-field-style-eye">
                 <mat-form-field appearance="fill">
-                    <mat-label class="hidden">Enter your password</mat-label>
-                    <input matInput [placeholder]="'Password'" [type]="hide ? 'password' : 'text'" value="123456">
+                    <mat-label class="hidden">Ingresa tu contraseña</mat-label>
+                    <input matInput [placeholder]="'Password'" [type]="hide ? 'password' : 'text'" value="123456" [(ngModel)]="usuario.password">
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -25,16 +25,16 @@
             </div>
         </div>
         <div class="inventual-login-footer-forgot mb-5">
-            <a [routerLink]="['/forgotpassword']" class="text-[16px] inline-block text-primary">Forgot Password?</a>
+            <a [routerLink]="['/forgotpassword']" class="text-[16px] inline-block text-primary">¿Olvidaste tu contraseña?</a>
         </div>
         <div class="inventual-login-btn mb-7">
             <div class="inventual-material-btn">
-                <button [routerLink]="['/loginActivos']" type="submit" mat-raised-button color="primary">Log in</button>
+                <button type="submit" mat-raised-button color="primary" (click)="iniciarSesion()">Inicia Sesion</button>
             </div>
         </div>
         <div class="inventual-login-footer">
             <div class="inventual-login-footer-account text-center">
-                <span class="text-[16px] inline-block text-body">Have not an account? <a [routerLink]="['/register']" class="text-[16px] text-primary">Register</a></span>
+                <span class="text-[16px] inline-block text-body">¿No tienes una cuenta? <a [routerLink]="['/register']" class="text-[16px] text-primary">Registrate</a></span>
             </div>
         </div>
     </div>

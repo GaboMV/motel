@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cabecera.component.scss']
 })
 export class CabeceraComponent implements OnInit {
+
+  nombre: string = localStorage.getItem('nombre') || '';
   //short menu activation start
   menuShortcutActive:boolean=false;
   shortmenu(){

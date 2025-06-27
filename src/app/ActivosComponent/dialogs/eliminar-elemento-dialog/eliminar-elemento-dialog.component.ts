@@ -48,6 +48,9 @@ export class EliminarElementoDialogComponent {
        case 'Cuarto':
         this.eliminarCuarto(id);
         break;
+        case 'Transaccion':
+        this.eliminarCuarto(id);
+        break;
     }
     this.cerrarDialog();
   }
@@ -92,5 +95,9 @@ export class EliminarElementoDialogComponent {
   eliminarCuarto(id: number) {
     this.cerrarDialog();
     this.dialogsService.confirmarAccion(true, 'Cuarto', 'eliminado correctamente', id);
+  }
+   eliminarTransaccion(id: number) {
+    this.cerrarDialog();
+    this.dialogsService.confirmarAccion(true, 'transaccion', 'eliminada correctamente', id);
   }
 }

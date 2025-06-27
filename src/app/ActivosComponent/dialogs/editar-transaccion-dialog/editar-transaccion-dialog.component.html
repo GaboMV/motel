@@ -1,0 +1,116 @@
+<mat-dialog-content class="p-0">
+  <div class="popup-body p-0 m-0 w-full">
+    <div class="inventual-popup-inner w-full">
+      <!-- Encabezado -->
+      <div class="w-full">
+        <h4 class="text-[20px] text-white font-bold bg-primary p-5 w-full m-0">
+          Editar Transacción
+        </h4>
+      </div>
+
+      <!-- Contenido del formulario -->
+      <div class="grid grid-cols-12 gap-x-7 sm:gap-x-0 px-5 pb-5">
+        <!-- Fecha -->
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-input-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-2">Fecha</h5>
+            <mat-form-field appearance="outline" class="w-full">
+              <input matInput [(ngModel)]="transaccion.fecha" placeholder="Ej. 2025-06-26">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Hora Entrada -->
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-input-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-2">Hora entrada</h5>
+            <mat-form-field appearance="outline" class="w-full">
+              <input matInput [(ngModel)]="transaccion.horaEntrada" placeholder="Ej. 14:00">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Hora Salida -->
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-input-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-2">Hora salida</h5>
+            <mat-form-field appearance="outline" class="w-full">
+              <input matInput [(ngModel)]="transaccion.horaSalida" placeholder="Ej. 16:30">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Ticket -->
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-input-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-2">Ticket</h5>
+            <mat-form-field appearance="outline" class="w-full">
+              <input matInput [(ngModel)]="transaccion.ticket" placeholder="Número de ticket">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Nombre del Cliente -->
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-input-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-2">Nombre del cliente</h5>
+            <mat-form-field appearance="outline" class="w-full">
+              <input matInput [(ngModel)]="transaccion.nombre" placeholder="Nombre del cliente">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Cuarto -->
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-select-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-2">Cuarto</h5>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Seleccionar cuarto</mat-label>
+              <mat-select [(ngModel)]="transaccion.cuarto">
+                <mat-option *ngFor="let cuarto of cuartos" [value]="cuarto.id">
+                  {{ cuarto.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Empleado -->
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-select-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-2">Empleado</h5>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Seleccionar empleado</mat-label>
+              <mat-select [(ngModel)]="transaccion.empleado">
+                <mat-option *ngFor="let emp of empleados" [value]="emp.id">
+                  {{ emp.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Estado -->
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-select-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-2">Estado</h5>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-select [(ngModel)]="transaccion.estado">
+                <mat-option [value]="true">Activo</mat-option>
+                <mat-option [value]="false">Inactivo</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="col-span-12">
+          <div class="inventual-material-btn pt-1.5 justify-end">
+            <button type="button" mat-raised-button color="warn" (click)="cerrarDialog()">Cancelar</button>
+            <button type="button" mat-raised-button color="primary" (click)="editarTransaccion()">Guardar Cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

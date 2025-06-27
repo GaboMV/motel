@@ -144,11 +144,11 @@
                     Acciones <mat-icon>arrow_drop_down</mat-icon>
                   </button>
                   <mat-menu #beforeMenu="matMenu" xPosition="before">
-                    <button mat-menu-item (click)="editType(row)">
+                    <button mat-menu-item (click)="editTransaccion(row)">
                       <img src="../../../../../assets/img/icon/action-2.png" alt="icon not found">
                       <span>Editar transaccion</span>
                     </button>
-                    <button mat-menu-item (click)="deleteType(row)">
+                    <button mat-menu-item (click)="deleteTransaccion(row)">
                       <img src="../../../../../assets/img/icon/action-6.png" alt="icon not found">
                       <span>Eliminar transaccion</span>
                     </button>
@@ -188,109 +188,3 @@
 </div>
 
 
-
-
-
-
-<!--EDIT MODAL -->
-<div class="custom-modal-backdrop" *ngIf="modalEditVisible">
-  <div class="custom-modal">
-    <h2>Editar Transaccion</h2>
- <mat-form-field class="w-full">
-      <mat-label>Fecha</mat-label>
-      <input matInput type="date" [(ngModel)]="newTransaction.fecha" />
-    </mat-form-field>
-    <mat-form-field class="w-full">
-      <mat-label>Hora de entrada</mat-label>
-      <input matInput type="time" [(ngModel)]="newTransaction.horaEntrada" />
-    </mat-form-field>
-
-    <mat-form-field class="w-full">
-      <mat-label>Hora de salida</mat-label>
-      <input matInput type="time" [(ngModel)]="newTransaction.horaSalida" />
-    </mat-form-field>
-
-    <mat-form-field class="w-full">
-      <mat-label>Ticket</mat-label>
-      <input matInput [(ngModel)]="newTransaction.ticket" />
-    </mat-form-field>
-
-     <mat-form-field class="w-full">
-      <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="newTransaction.nombre"/>
-    </mat-form-field>
-
-     <mat-form-field class="w-full">
-      <mat-label>Cuarto</mat-label>
-      <input matInput [(ngModel)]="newTransaction.cuarto" />
-    </mat-form-field>
-
-     <mat-form-field class="w-full">
-      <mat-label>Empleado</mat-label>
-      <input matInput [(ngModel)]="newTransaction.empleado"/>
-    </mat-form-field>
-
-     <mat-form-field class="w-full">
-      <mat-label>Monto</mat-label>
-      <input matInput [(ngModel)]="newTransaction.monto">
-    </mat-form-field>
-
-    
-
-    <div class="modal-actions">
-      <button mat-button (click)="closeEditType()">Cancelar</button>
-      <button mat-raised-button color="primary" (click)="saveType()">Guardar</button>
-    </div>
-  </div>
-</div>
-
-
-<!-- Modal de Confirmación de Eliminación -->
-<div class="custom-modal-backdrop" *ngIf="showDeleteConfirm">
-  <div class="custom-modal text-center">
-    <h2>¿Estás seguro de eliminar esta transaccion?</h2>
-    <p class="text-gray-600 mb-4">Esta acción no se puede deshacer.</p>
-    <div class="modal-actions justify-center">
-      <button mat-stroked-button color="warn" (click)="confirmDelete()">Sí, eliminar</button>
-      <button mat-raised-button color="primary" (click)="showDeleteConfirm = false">Cancelar</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal de Resultado de Eliminación -->
-<div class="custom-modal-backdrop" *ngIf="deleteResult !== null">
-  <div class="custom-modal text-center">
-    <div class="flex justify-center mb-4 text-[48px]">
-      <mat-icon [ngClass]="deleteResult ? 'text-green-500' : 'text-red-500'">
-        {{ deleteResult ? 'check_circle' : 'cancel' }}
-      </mat-icon>
-    </div>
-    <h2 class="mb-2">
-      {{ deleteResult ? 'transaccion eliminada' : 'Error al eliminar la transaccion' }}
-    </h2>
-    <div class="modal-actions justify-center">
-      <button mat-raised-button color="primary" (click)="deleteResult = null">Aceptar</button>
-    </div>
-  </div>
-</div>
-
-
-<div class="custom-modal-backdrop" *ngIf="showCSV">
-  <div class="custom-modal text-center">
-      <mat-icon >download</mat-icon>
-    <h2>Se acaba de descargar un reporte csv de las transacciones realzadas en la fecha seleccionada en el filtro</h2>
-    <div class="modal-actions justify-center">
-      <button mat-stroked-button color="primary" (click)="closeCsv()">Aceptar</button>
-    </div>
-  </div>
-</div>
-
-<div class="custom-modal-backdrop" *ngIf="showPDF">
-  <div class="custom-modal text-center">
-     <mat-icon >download</mat-icon>
-    <h2>Se acaba de descargar un reporte pdf de las transacciones realzadas en la fecha seleccionada en el filtro</h2>
-    <div class="modal-actions justify-center">
-      <button mat-stroked-button color="primary" (click)="closePdf()">Aceptar</button>
-    </div>
-  </div>
-</div>

@@ -79,6 +79,7 @@ import { CrearTipoCuartoDialogComponent } from './dialogs/crear-tipo-cuarto-dial
 import { EditarTipoCuartoDialogComponent } from './dialogs/editar-tipo-cuarto-dialog/editar-tipo-cuarto-dialog.component';
 import { CrearCuartoDialogComponent } from './dialogs/crear-cuarto-dialog/crear-cuarto-dialog.component';
 import { EditarCuartoDialogComponent } from './dialogs/editar-cuarto-dialog/editar-cuarto-dialog.component';
+import { EditarTransaccionDialogComponent } from './dialogs/editar-transaccion-dialog/editar-transaccion-dialog.component';
 
 @NgModule({
   imports: [
@@ -168,6 +169,7 @@ import { EditarCuartoDialogComponent } from './dialogs/editar-cuarto-dialog/edit
     EditarTipoCuartoDialogComponent,
     CrearCuartoDialogComponent,
     EditarCuartoDialogComponent,
+    EditarTransaccionDialogComponent,
   ],
 })
 export class ActivosProyectModule {}

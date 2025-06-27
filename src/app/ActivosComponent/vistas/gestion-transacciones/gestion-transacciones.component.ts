@@ -9,6 +9,7 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import * as Papa from 'papaparse'
 import { transaccionData, TransaccionInterface } from '../../servicios/data/transactionData';
+import { AccessDIalogsService } from '../../servicios/access/access-dialogs.service';
 
 //import * as Papa from 'papaparse';
 
@@ -41,7 +42,7 @@ export class GestionTransaccionesComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialogsService: AccessDIalogsService) {
     // Asignamos los datos de roles a la fuente de datos
     this.dataSource = new MatTableDataSource(transaccionData);
   }
@@ -155,23 +156,13 @@ newTransaction = {
   estado: ''
 };
 
-openModal() {
-  this.modalVisible = true;
-}
 
-closeModal() {
-  this.modalVisible = false;
-}
+editTransaccion(transaccion: TransaccionInterface) {
+this.dialogsService.editarTransaccion(transaccion)}
+deleteTransaccion(transaccion: TransaccionInterface) {
+    this.dialogsService.eliminarElemento(transaccion.id, 'Transaccion');
+  }
 
-saveRoom() {
-  console.log('Nuevo tipo de cuarto:', this.newTransaction);
-  this.closeModal();
-}
-
-saveType() {
-  console.log('Nuevo tipo de cuarto:', this.newTransaction);
-  this.closeEditType();
-}
 
 fechaSeleccionada: Date | null = null;
 dataOriginal: any[] = []; // Contendrá todas las transacciones

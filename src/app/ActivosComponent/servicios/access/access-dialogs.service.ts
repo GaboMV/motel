@@ -31,6 +31,7 @@ import { RoomTypeInterface } from '../data/roomTypeData';
 import { CrearCuartoDialogComponent } from '../../dialogs/crear-cuarto-dialog/crear-cuarto-dialog.component';
 import { RoomInterface } from '../data/roomData2';
 import { EditarCuartoDialogComponent } from '../../dialogs/editar-cuarto-dialog/editar-cuarto-dialog.component';
+import { EditarTransaccionDialogComponent } from '../../dialogs/editar-transaccion-dialog/editar-transaccion-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -203,4 +204,12 @@ export class AccessDIalogsService {
       data: cuarto
     });
   }
+//acceso a dialogs transaccion
+ editarTransaccion (transaccion: TransaccionInterface): void {
+    this.dialog.open(EditarTransaccionDialogComponent, {
+      width: '700px',
+      data: transaccion
+    });
+  }
+
 }

@@ -81,52 +81,12 @@ export class GestionTipoCuartosComponent implements OnInit {
   }
   //sidebar menu activation end
 
-  addRole() {
-    // Lógica para agregar un nuevo rol
-    console.log('Agregar nuevo rol');
-  }
-modalEditVisible = false;
-  editType(role: RoomTypeInterface) {
-    this.modalEditVisible = true;
-    console.log('Editar rol:', role);
-  }
-   closeEditType() {
-    this.modalEditVisible = false;
-    
-  }
+ 
 
-  duplicateRole(role: RoomTypeInterface) {
-    // Lógica para duplicar un rol
-    console.log('Duplicar rol:', role);
-  }
 
-  //eliminacion de tipo cuarto
-showDeleteConfirm=false;
-deleteResult: boolean | null = null;
-tipoSeleccionado: any = null;
-  deleteType(role: RoomTypeInterface) {
-this.showDeleteConfirm=true;
-    console.log('Eliminar rol:', role);
-  }
 
-  confirmDelete() {
-  this.showDeleteConfirm = false;
 
-  // Simula eliminación
-  setTimeout(() => {
-    const success = true; // Aquí va la lógica real
-    this.deleteResult = success;
-
-    if (success) {
-      // Elimina de la fuente de datos si se usa un array
-      const index = this.dataSource.data.indexOf(this.tipoSeleccionado);
-      if (index !== -1) {
-        this.dataSource.data.splice(index, 1);
-        this.dataSource._updateChangeSubscription(); // actualiza la tabla
-      }
-    }
-  }, 500);
-}
+ 
 
   toggleRoleStatus(role: RoomTypeInterface) {
     // Lógica para cambiar el estado de un rol

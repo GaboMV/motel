@@ -6,7 +6,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { roleData, RoleInterface } from '../../servicios/data/roomTypeData';
+import { roomTypeData, RoomTypeInterface } from '../../servicios/data/roomTypeData';
+import { AccessDIalogsService } from '../../servicios/access/access-dialogs.service';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class GestionCuartosComponent implements OnInit {
   @ViewChild(MatSort)
   sort!: MatSort;
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialogsService: AccessDIalogsService) {
     // Asignamos los datos de roles a la fuente de datos
     this.dataSource = new MatTableDataSource(roomData);
   }
@@ -142,27 +143,21 @@ newRoom = {
   descripcion: ''
 };
 
-openModal() {
-  this.modalVisible = true;
-}
+  addCuarto() {
+    this.dialogsService.crearCuarto();
+  }
 
-closeModal() {
-  this.modalVisible = false;
-}
 
-saveRoom() {
-  console.log('Nuevo tipo de cuarto:', this.newRoom);
-  this.closeModal();
-}
 
-saveType() {
-  console.log('Nuevo tipo de cuarto:', this.newRoom);
-  this.closeEditType();
-}
 
-roomTypes: string[] = [];
+editCuarto(cuarto: RoomInterface) {
+this.dialogsService.editarCuarto(cuarto)}
+
+ deleteCuarto(cuarto: RoomTypeInterface) {
+    this.dialogsService.eliminarElemento(cuarto.id, 'Cuarto');
+  }
 ngOnInit(): void {
-  this.roomTypes = [...new Set(roleData.map(room => room.nombre))];
+ 
 }
   
   previewImage: string | ArrayBuffer | null = null;

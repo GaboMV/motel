@@ -1,0 +1,71 @@
+<mat-dialog-content>
+  <div class="popup-body">
+    <div class="inventual-popup-inner">
+      <div class="inventual-popup-header relative mb-5">
+        <div class="inventual-popup-header-title">
+          <h4 class="text-[20px] text-white font-bold bg-primary p-5">Editar Cuarto</h4>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-12 gap-x-7 sm:gap-x-0 px-5 pb-5">
+
+        <!-- Nombre -->
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-input-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-2">Nombre o código del cuarto*</h5>
+            <mat-form-field appearance="outline" class="w-full">
+              <input matInput [(ngModel)]="cuarto.nombre" placeholder="Ej. A24" required>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Descripción -->
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-input-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-2">Descripción</h5>
+            <mat-form-field appearance="outline" class="w-full">
+              <textarea matInput [(ngModel)]="cuarto.descripcion" placeholder="Descripción"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Estado -->
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-select-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-2">Estado*</h5>
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-select [(ngModel)]="cuarto.estado">
+                <mat-option [value]="true">Activo</mat-option>
+                <mat-option [value]="false">Inactivo</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Tipo de cuarto -->
+        <div class="col-span-6 sm:col-span-12">
+          <div class="inventual-select-field mb-6">
+            <h5 class="text-[15px] text-heading font-semibold mb-2">Tipo*</h5>
+            <mat-form-field  class="w-full">
+              <mat-label>Tipo de cuarto</mat-label>
+              <mat-select [(ngModel)]="cuarto.tipo">
+                <mat-option *ngFor="let tipo of tiposCuarto" [value]="tipo.id">
+                  {{ tipo.nombre }} - {{ tipo.descripcion }} (Bs. {{ tipo.precio }})
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="col-span-12">
+          <div class="inventual-material-btn pt-1.5 justify-end">
+            <button type="button" mat-raised-button color="warn" (click)="cerrarDialog()">Cancelar</button>
+            <button type="button" mat-raised-button color="primary" (click)="editarCuarto()">Guardar Cambios</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

@@ -32,7 +32,7 @@
     <div class="inventual-content-area px-7">
       <div class="inventual-common-material-table bg-white p-7 custom-shadow rounded-8 mb-5">
         <div class="inventual-material-btn mb-7">
-          <button mat-raised-button color="primary" (click)="openModal()">
+          <button mat-raised-button color="primary" (click)="addCuarto()">
             <mat-icon>add_circle_outline</mat-icon>
             Agregar cuartos
           </button>
@@ -120,11 +120,11 @@
                     Acciones <mat-icon>arrow_drop_down</mat-icon>
                   </button>
                   <mat-menu #beforeMenu="matMenu" xPosition="before">
-                    <button mat-menu-item (click)="editType(row)">
+                    <button mat-menu-item (click)="editCuarto(row)">
                       <img src="../../../../../assets/img/icon/action-2.png" alt="icon not found">
                       <span>Editar tipo de cuarto</span>
                     </button>
-                    <button mat-menu-item (click)="deleteType(row)">
+                    <button mat-menu-item (click)="deleteCuarto(row)">
                       <img src="../../../../../assets/img/icon/action-6.png" alt="icon not found">
                       <span>Eliminar tipo de cuarto</span>
                     </button>
@@ -161,110 +161,3 @@
 
 
 
-<!-- MODAL -->
-<div class="custom-modal-backdrop" *ngIf="modalVisible">
-  <div class="custom-modal">
-    <h2>Agregar Tipo de Cuarto</h2>
-
-    <mat-form-field class="w-full">
-      <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="newRoom.nombre" />
-    </mat-form-field>
-
-     <mat-form-field class="w-full">
-      <mat-label>Tipo de Cuarto</mat-label>
-      <mat-select [(ngModel)]="newRoom.tipo">
-        <mat-option *ngFor="let tipo of roomTypes" [value]="tipo">
-      {{ tipo }}
-    </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="w-full">
-      <mat-label>Descripción</mat-label>
-      <textarea matInput [(ngModel)]="newRoom.descripcion"></textarea>
-    </mat-form-field>
-
-     <div class="w-full mb-4">
-      <label for="roomImage">Imagen del Cuarto</label>
-      <input type="file" id="roomImage" (change)="onImageSelected($event)" />
-      <img *ngIf="previewImage" [src]="previewImage" alt="Vista previa" style="max-width: 100%; margin-top: 10px;" />
-    </div>
-
-
-    <div class="modal-actions">
-      <button mat-raised-button  (click)="closeModal()">Cancelar</button>
-      <button mat-raised-button color="primary" (click)="saveRoom()">Guardar</button>
-    </div>
-
-
-  </div>
-</div>
-
-
-<!--EDIT MODAL -->
-<div class="custom-modal-backdrop" *ngIf="modalEditVisible">
-  <div class="custom-modal">
-    <h2>Editar Cuarto</h2>
-
-    <mat-form-field class="w-full">
-      <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="newRoom.nombre" />
-    </mat-form-field>
-
-     <mat-form-field class="w-full">
-      <mat-label>Tipo de Cuarto</mat-label>
-      <mat-select [(ngModel)]="newRoom.tipo">
-          <mat-option *ngFor="let tipo of roomTypes" [value]="tipo">
-      {{ tipo }}
-    </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="w-full">
-      <mat-label>Descripción</mat-label>
-      <textarea matInput [(ngModel)]="newRoom.descripcion"></textarea>
-    </mat-form-field>
-
-     <div class="w-full mb-4">
-      <label for="roomImage">Imagen del Cuarto</label>
-      <input type="file" id="roomImage" (change)="onImageSelected($event)" />
-      <img *ngIf="previewImage" [src]="previewImage" alt="Vista previa" style="max-width: 100%; margin-top: 10px;" />
-    </div>
-
-    <div class="modal-actions">
-      <button mat-button (click)="closeEditType()">Cancelar</button>
-      <button mat-raised-button color="primary" (click)="saveType()">Guardar</button>
-    </div>
-  </div>
-</div>
-
-
-<!-- Modal de Confirmación de Eliminación -->
-<div class="custom-modal-backdrop" *ngIf="showDeleteConfirm">
-  <div class="custom-modal text-center">
-    <h2>¿Estás seguro de eliminar este cuarto?</h2>
-    <p class="text-gray-600 mb-4">Esta acción no se puede deshacer.</p>
-    <div class="modal-actions justify-center">
-      <button mat-stroked-button color="warn" (click)="confirmDelete()">Sí, eliminar</button>
-      <button mat-raised-button color="primary" (click)="showDeleteConfirm = false">Cancelar</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal de Resultado de Eliminación -->
-<div class="custom-modal-backdrop" *ngIf="deleteResult !== null">
-  <div class="custom-modal text-center">
-    <div class="flex justify-center mb-4 text-[48px]">
-      <mat-icon [ngClass]="deleteResult ? 'text-green-500' : 'text-red-500'">
-        {{ deleteResult ? 'check_circle' : 'cancel' }}
-      </mat-icon>
-    </div>
-    <h2 class="mb-2">
-      {{ deleteResult ? 'Cuarto eliminado' : 'Error al eliminar el Cuarto' }}
-    </h2>
-    <div class="modal-actions justify-center">
-      <button mat-raised-button color="primary" (click)="deleteResult = null">Aceptar</button>
-    </div>
-  </div>
-</div>

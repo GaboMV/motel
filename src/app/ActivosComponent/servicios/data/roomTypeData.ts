@@ -1,5 +1,5 @@
 // src/app/servicios/data/roleData.ts
-export interface RoleInterface {
+export interface RoomTypeInterface {
   id: number;
   nombre: string;
   descripcion: string;
@@ -9,7 +9,7 @@ export interface RoleInterface {
   estado: boolean;
 }
 
-export const roleData: RoleInterface[] = [
+export const roomTypeData: RoomTypeInterface[] = [
   {
     id: 1,
     nombre: 'tematico',

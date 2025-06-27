@@ -75,6 +75,10 @@ import { CrearCheckoutDialogComponent } from './dialogs/crear-checkout-dialog/cr
 import { CrearHabilitarDialogComponent } from './dialogs/crear-habilitar-dialog/crear-habilitar-dialog.component';
 import { AgregarProductoCuartoDialogComponent } from './dialogs/agregar-producto-cuarto-dialog/agregar-producto-cuarto-dialog.component';
 import { LoginComponent } from './comunes/login/login.component';
+import { CrearTipoCuartoDialogComponent } from './dialogs/crear-tipo-cuarto-dialog/crear-tipo-cuarto-dialog.component';
+import { EditarTipoCuartoDialogComponent } from './dialogs/editar-tipo-cuarto-dialog/editar-tipo-cuarto-dialog.component';
+import { CrearCuartoDialogComponent } from './dialogs/crear-cuarto-dialog/crear-cuarto-dialog.component';
+import { EditarCuartoDialogComponent } from './dialogs/editar-cuarto-dialog/editar-cuarto-dialog.component';
 
 @NgModule({
   imports: [
@@ -160,6 +164,10 @@ import { LoginComponent } from './comunes/login/login.component';
     CrearHabilitarDialogComponent,
     AgregarProductoCuartoDialogComponent,
     LoginComponent,
+    CrearTipoCuartoDialogComponent,
+    EditarTipoCuartoDialogComponent,
+    CrearCuartoDialogComponent,
+    EditarCuartoDialogComponent,
   ],
 })
 export class ActivosProyectModule {}

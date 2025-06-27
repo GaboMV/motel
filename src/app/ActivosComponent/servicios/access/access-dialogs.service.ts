@@ -25,6 +25,12 @@ import { CrearOcuparcuartoDialogComponent } from '../../dialogs/crear-ocuparcuar
 import { AgregarProductoCuartoDialogComponent } from '../../dialogs/agregar-producto-cuarto-dialog/agregar-producto-cuarto-dialog.component';
 import { CrearHabilitarDialogComponent } from '../../dialogs/crear-habilitar-dialog/crear-habilitar-dialog.component';
 import { CrearMantenimientoDialogComponent } from '../../dialogs/crear-mantenimiento-dialog/crear-mantenimiento-dialog.component';
+import { CrearTipoCuartoDialogComponent } from '../../dialogs/crear-tipo-cuarto-dialog/crear-tipo-cuarto-dialog.component';
+import { EditarTipoCuartoDialogComponent } from '../../dialogs/editar-tipo-cuarto-dialog/editar-tipo-cuarto-dialog.component';
+import { RoomTypeInterface } from '../data/roomTypeData';
+import { CrearCuartoDialogComponent } from '../../dialogs/crear-cuarto-dialog/crear-cuarto-dialog.component';
+import { RoomInterface } from '../data/roomData2';
+import { EditarCuartoDialogComponent } from '../../dialogs/editar-cuarto-dialog/editar-cuarto-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -173,6 +179,28 @@ export class AccessDIalogsService {
         tipo: 'limpieza',
         idAux: cuarto.id
       },
+    });
+  }
+  // acceso a dialogs de tipo de cuarto
+   crearTipoCuarto(): void {
+    this.dialog.open(CrearTipoCuartoDialogComponent, {
+    });
+  }
+  editarTipoCuarto (tipoCuarto: RoomTypeInterface): void {
+    this.dialog.open(EditarTipoCuartoDialogComponent, {
+      width: '700px',
+      data: tipoCuarto
+    });
+  }
+  //acceso a dialogs de cuarto
+     crearCuarto(): void {
+    this.dialog.open(CrearCuartoDialogComponent, {
+    });
+  }
+   editarCuarto (cuarto: RoomInterface): void {
+    this.dialog.open(EditarCuartoDialogComponent, {
+      width: '700px',
+      data: cuarto
     });
   }
 }

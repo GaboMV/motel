@@ -1,3 +1,4 @@
+
 # Etapa 1: Build Angular
 FROM node:18 as build-stage
 

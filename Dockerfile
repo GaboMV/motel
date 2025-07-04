@@ -1,6 +1,6 @@
 
 # Etapa 1: Build Angular
-FROM node:18 as build-stage
+FROM node:18-bullseye AS build-stage
 
 WORKDIR /app
 COPY . .
@@ -8,7 +8,7 @@ RUN npm install
 RUN npm run build --prod
 
 # Etapa 2: Servir app con NGINX
-FROM nginx:alpine as production-stage
+FROM nginx:alpine AS production-stage
 
 COPY --from=build-stage /app/dist /usr/share/nginx/html
 EXPOSE 80

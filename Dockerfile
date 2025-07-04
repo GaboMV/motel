@@ -5,7 +5,7 @@ FROM node:18-bullseye AS build-stage
 WORKDIR /app
 COPY . .
 RUN npm install --legacy-peer-deps
-RUN npm run build --prod
+RUN npm run build -- --base-href=/
 
 # Etapa 2: Servir app con NGINXd
 FROM nginx:alpine AS production-stage

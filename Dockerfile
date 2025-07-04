@@ -8,8 +8,8 @@ RUN npm install --legacy-peer-deps
 RUN npm run build --prod
 
 # Etapa 2: Servir app con NGINXd
-FROM nginx:alpine AS production-stage /app/dist/Frontend-Activos-Fijos /usr/share/nginx/html
+FROM nginx:alpine AS production-stage
 
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY --from=build-stage /app/dist/Frontend-Activos-Fijos /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

@@ -20,15 +20,15 @@ jobs:
           node-version: '18'
 
       - name: Instalar dependencias
-        working-directory: ./src/frontend
+        working-directory: ./motel
         run: npm install
 
       - name: Compilar Angular (modo producción)
-        working-directory: ../src/frontend
+        working-directory: ../motel
         run: npm run build --prod
 
       - name: Construir imagen Docker del frontend
-        run: docker build -t hotelsoft-frontend ./src/frontend
+        run: docker build -t hotelsoft-frontend ./motel
 
       - name: Subir imagen a DockerHub (opcional)
         if: github.ref == 'refs/heads/main'

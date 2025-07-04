@@ -4,7 +4,7 @@ FROM node:18-bullseye AS build-stage
 
 WORKDIR /app
 COPY . .
-RUN npm install
+RUN npm install --legacy-peer-deps
 RUN npm run build --prod
 
 # Etapa 2: Servir app con NGINX

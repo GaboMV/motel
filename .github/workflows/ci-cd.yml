@@ -22,13 +22,13 @@ jobs:
       - name: Instalar dependencias
         run: npm install --legacy-peer-deps
 
-      - name: Compilar Angular (modo producción)
+      - name: Compilar Angular
         run: npm run build --prod
 
       - name: Construir imagen Docker del frontend
         run: docker build -t hotelsoft-frontend .
 
-      - name: Subir imagen a DockerHub (opcional)
+      - name: Subir imagen a DockerHub
         if: github.ref == 'refs/heads/main'
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER }}
@@ -38,7 +38,7 @@ jobs:
           docker tag hotelsoft-frontend $DOCKER_USER/hotelsoft-frontend:latest
           docker push $DOCKER_USER/hotelsoft-frontend:latest
 
-      - name: Desplegar localmente con Docker (simulado)
+      - name: Desplegar localmente con Docker
         run: |
           docker stop hotelsoft-frontend || true
           docker rm hotelsoft-frontend || true
